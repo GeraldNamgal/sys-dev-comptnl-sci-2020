@@ -6,7 +6,6 @@
 	* ##### For example, do not discuss implementation details
 * ##### Solutions *must* be your own!
 #### Grading Scale ([course page](https://harvard-iacs.github.io/2020-CS107/pages/coursework.html#hw) cited)
-
 | Grade | Meaning                                    |
 | ----- | ------------------------------------------ |
 | 100   | Solid / no mistakes (or really minor ones) |
