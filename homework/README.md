@@ -17,3 +17,4 @@
 #### References
 1. ##### https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lists
 2. ##### https://stackoverflow.com/questions/37575916/how-to-markdown-nested-list-items-in-bitbucket
+3. ##### https://stackoverflow.com/questions/3003476/get-underlined-text-with-markdown#:~:text=7%20Answers&text=Markdown%20doesn't%20have%20a,it's%20usually%20used%20for%20hyperlinks.&text=In%20GitHub%20markdown%20text,%2Fins%3E%20works%20just%20fine.
