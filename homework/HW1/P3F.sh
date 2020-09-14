@@ -1,6 +1,5 @@
 #!/bin/bash
-for file in *
-do
+for file in *; do
     if [ -f $file ]; then
         echo "$file $(< $file wc -l)"
     fi
