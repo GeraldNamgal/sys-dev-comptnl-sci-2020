@@ -6,8 +6,6 @@ def dna_complement(sequence):
     valid_seq = True
     if sequence:
         for base in sequence:
-            # TODO: Can sequences have spaces?
-            # TODO: Truncate leading/trailing space?
             if base.upper() in Bases:
                 complement = complement + Bases.get(base.upper())
             else:
@@ -15,7 +13,6 @@ def dna_complement(sequence):
                 break
     else:
         valid_seq = False
-    # TODO: The function needs to return None (the object)
     if valid_seq:
         return complement
     else:
