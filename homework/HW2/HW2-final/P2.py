@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # dna_complement(sequence)
 # Takes a DNA sequence and returns its complement
 def dna_complement(sequence):
