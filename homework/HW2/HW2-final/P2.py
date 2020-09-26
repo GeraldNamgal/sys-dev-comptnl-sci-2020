@@ -19,6 +19,7 @@ def dna_complement(sequence):
     else:
         return None
 
+
 # Demo of dna_complement(sequence)
 valid_input = "aattggcc"
 invalid_input = "aattggzz"
