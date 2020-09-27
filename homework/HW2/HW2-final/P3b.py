@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 print("This program causes an error because the 'balance' name gets "
       + "redefined in the 'else' block of code (in the inner function) when "
       + "the outer function is called and thus becomes bound to a different "
