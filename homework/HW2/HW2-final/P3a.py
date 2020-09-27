@@ -23,8 +23,12 @@ wd(withdrawal_amount)
 wd(new_withdrawal_amount)
 
 
-print("The above program does not behave correctly because it's not updating "
-      + "the value of the 'balance' object stored in memory that was passed in "
-      + "to the outter function 'make_withdrawal()'. The value of 'balance' in "
-      + "this case is set on the call to 'make_withdrawal' and can not be "
-      + "changed from calls to the inner closure function.")
+print("\nThe above program does not behave correctly (under the hood) because "
+      + "it's not updating the value of the 'balance' object stored in memory "
+      + "that was passed in to the outer function 'make_withdrawal()'. The "
+      + "value of the object 'balance' refers to in this case is set on the "
+      + "call to 'make_withdrawal()' when it is captured by the inner function "
+      + "after which it can not be changed via calls to the returned inner "
+      + "'closure' function. An error would occur if 'balance' was reassigned "
+      + "in the inner function. This process is called encapsulation which is "
+      + "useful for protecting against modifying state incorrectly.")
