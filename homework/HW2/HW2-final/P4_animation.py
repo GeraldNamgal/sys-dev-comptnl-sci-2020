@@ -13,8 +13,9 @@ def clock_hand(hand_length):
     return closure
 
 
-xmin, xmax, ymin, ymax = -3.25, 3.25, -3.25, 3.25
-fig = plt.figure(figsize=(6, 6))
+xmin, xmax, ymin, ymax = -3.25, 3.25, -3.25, 3.25        # plt.axis() parameters
+fig = plt.figure(figsize=(6, 6))                  # defining figure to use/reuse
+# TODO: Change while loop and use break statement
 for counter in range(1, 120):
     currentDT = datetime.datetime.now()
     hour = currentDT.hour
