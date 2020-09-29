@@ -48,10 +48,11 @@ x_values_sec = [point1_sec[0], point2_sec[0]]
 y_values_sec = [point1_sec[1], point2_sec[1]]
 
 # Plotting...
-matplotlib.pyplot.axis('off')
 matplotlib.pyplot.plot(x_values_hour, y_values_hour)
 matplotlib.pyplot.plot(x_values_min, y_values_min)
 matplotlib.pyplot.plot(x_values_sec, y_values_sec)
+matplotlib.pyplot.axis('off')                           # Hide axes
+matplotlib.pyplot.axis([-3.25, 3.25, -3.25, 3.25])      # Set aspect ratio
 matplotlib.pyplot.show()
 
 
