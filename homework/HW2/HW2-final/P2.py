@@ -18,7 +18,7 @@ def dna_complement(sequence):
         return None
 
 
-# Demo of dna_complement(sequence)
+# Demo of dna_complement(sequence)...
 valid_input = "aatTgGcC"
 invalid_input = "aatTgGzZ"
 print("Example input string: \"", valid_input, "\"", sep="")

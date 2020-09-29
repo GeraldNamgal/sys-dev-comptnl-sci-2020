@@ -20,6 +20,8 @@ def make_withdrawal(balance):
         try:
             if balance - withdraw_amt < 0:
                 raise ValueError('insufficient funds for withdrawal amount')
+            if withdraw_amt <= 0:
+                raise ValueError('please enter an amount more than zero')
         except ValueError as err:
             print("ERROR:", err)
         else:
@@ -32,6 +34,8 @@ def make_withdrawal(balance):
 init_balance = 10
 withdrawal_amount = 11
 new_withdrawal_amount = 10
+
+# Demo...
 wd = make_withdrawal(init_balance)
 wd(withdrawal_amount)
 wd(new_withdrawal_amount)
