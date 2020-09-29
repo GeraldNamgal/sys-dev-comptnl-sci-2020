@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# dna_complement(sequence)
-# Takes a DNA sequence and returns its complement
 def dna_complement(sequence):
     Bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
     complement = ""
@@ -21,12 +19,13 @@ def dna_complement(sequence):
 
 
 # Demo of dna_complement(sequence)
-valid_input = "aattggcc"
-invalid_input = "aattggzz"
+valid_input = "aatTgGcC"
+invalid_input = "aatTgGzZ"
 print("Example input string: \"", valid_input, "\"", sep="")
 print("Complement is: \"", dna_complement(valid_input), "\"", sep="")
 print("Example input string: \"", invalid_input, "\"", sep="")
 print("Complement is:", dna_complement(invalid_input))
+
 
 # References
 # https://www.w3schools.com/python/python_functions.asp
