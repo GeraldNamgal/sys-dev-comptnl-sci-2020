@@ -13,24 +13,24 @@ def clock_hand(hand_length):
     return closure
 
 
-fig = plt.figure(figsize=(6, 6))            # Defining figure to use/reuse
-start_time = None                           # Initialize start time of animation
-run_duration = 64                           # Num seconds to run animation for
-end_time = None                             # Initialize end time of animation
+fig = plt.figure(figsize=(6, 6))           # Defining figure window to use/reuse
+start_time = None                          # Initialize start time of animation
+run_duration = 64                          # Num seconds to run animation for
+end_time = None                            # Initialize end time of animation
 
 # Running animation...
 while True:
     currentDT = datetime.datetime.now()
+
+    if start_time is None:                 # Set timer if not yet set
+        start_time = currentDT
+        end_time = start_time + datetime.timedelta(seconds=run_duration)
+    elif currentDT >= end_time:            # If time's up then end animation
+        break
+
     hour = currentDT.hour
     minute = currentDT.minute
     second = currentDT.second
-
-    if start_time is None:                  # Set timer if not yet set
-        start_time = currentDT
-        end_time = start_time + datetime.timedelta(seconds=run_duration)
-
-    elif currentDT >= end_time:             # If time's up then end animation
-        break
 
     theta_hour = 90 - (30 * hour) - (minute / 2)
     theta_min = 90 - (6 * minute)
@@ -65,8 +65,8 @@ while True:
     plt.plot(x_values_hour, y_values_hour)
     plt.plot(x_values_min, y_values_min)
     plt.plot(x_values_sec, y_values_sec)
-    plt.axis('off')                         # Hides axes
-    plt.axis([-3.25, 3.25, -3.25, 3.25])    # For consistent aspect ratio
+    plt.axis('off')                        # Hides axes
+    plt.axis([-3.25, 3.25, -3.25, 3.25])   # For consistent aspect ratio
     fig.canvas.draw()
     plt.pause(0.1)
     plt.cla()
