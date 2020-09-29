@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-print("This program does not behave correctly (under the hood) because "
+print("This program does not behave correctly ('under the hood') because "
       + "it's not updating the value of the 'balance' object stored in memory "
       + "that was passed in to the outer function 'make_withdrawal()'. The "
       + "value of the object 'balance' refers to in this case is set on the "
