@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 3b
+
+
 print("This program causes an error because the 'balance' name gets "
       + "redefined in the 'else' block of code (in the inner function) when "
       + "the outer function is called and thus becomes bound to a different "

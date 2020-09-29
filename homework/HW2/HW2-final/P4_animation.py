@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 4 (animation)
+
+
 import numpy
 import matplotlib.pyplot as plt
 import datetime
@@ -63,8 +68,8 @@ while True:
 
     # Plotting...
     plt.plot(x_values_hour, y_values_hour, linewidth=10)
-    plt.plot(x_values_min, y_values_min, linewidth=7.5)
-    plt.plot(x_values_sec, y_values_sec, linewidth=5.25)
+    plt.plot(x_values_min, y_values_min, linewidth=8)
+    plt.plot(x_values_sec, y_values_sec, linewidth=3)
     plt.axis('off')                        # Hides axes
     plt.axis([-3.25, 3.25, -3.25, 3.25])   # For consistent aspect ratio
     fig.canvas.draw()

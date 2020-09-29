@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 2
+
+
 def dna_complement(sequence):
     Bases = {'A': 'T', 'T': 'A', 'G': 'C', 'C': 'G'}
     complement = ""

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 3c
+
+
 def make_withdrawal(balance):
     def closure(withdraw_amt):
         nonlocal balance

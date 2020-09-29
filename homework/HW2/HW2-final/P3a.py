@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 3a
+
+
 print("This program does not behave correctly ('under the hood') because "
       + "it's not updating the value of the 'balance' object stored in memory "
       + "that was passed in to the outer function 'make_withdrawal()'. The "
-      + "value of the object 'balance' refers to in this case is set on the "
+      + "value and object 'balance' refers to is set (in this case) on the "
       + "call to 'make_withdrawal()' when it is captured by the inner function "
       + "after which it can not be changed via calls to the returned inner "
       + "'closure' function. An error would occur if 'balance' was reassigned "

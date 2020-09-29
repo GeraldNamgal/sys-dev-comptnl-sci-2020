@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Gerald Arocena
+# CSCI E-207, Fall 2020
+# HW2, Problem 4
+
+
 import numpy
 import matplotlib.pyplot
 import datetime
@@ -49,8 +54,8 @@ y_values_sec = [point1_sec[1], point2_sec[1]]
 
 # Plotting...
 matplotlib.pyplot.plot(x_values_hour, y_values_hour, linewidth=10)
-matplotlib.pyplot.plot(x_values_min, y_values_min, linewidth=7.5)
-matplotlib.pyplot.plot(x_values_sec, y_values_sec, linewidth=5.25)
+matplotlib.pyplot.plot(x_values_min, y_values_min, linewidth=8)
+matplotlib.pyplot.plot(x_values_sec, y_values_sec, linewidth=3)
 matplotlib.pyplot.axis('off')                           # Hide axes
 matplotlib.pyplot.axis([-3.25, 3.25, -3.25, 3.25])      # Set aspect ratio
 matplotlib.pyplot.show()
