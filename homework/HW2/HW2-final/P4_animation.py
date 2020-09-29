@@ -15,7 +15,7 @@ def clock_hand(hand_length):
 
 fig = plt.figure(figsize=(6, 6))           # Defining figure window to use/reuse
 start_time = None                          # Initialize start time of animation
-run_duration = 64                          # To be sure to go for at least 1 min
+run_duration = 64                          # Run for at least 1 min (60+ secs)
 end_time = None                            # Initialize end time of animation
 
 # Running animation...
