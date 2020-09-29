@@ -22,9 +22,9 @@ theta_hour = 90 - (30 * hour) - (minute / 2)
 theta_min = 90 - (6 * minute)
 theta_sec = 90 - (6 * second)
 
-length_hour = 2
-length_min = 4
-length_sec = 6
+length_hour = 1.7
+length_min = 2.9
+length_sec = 2.75
 
 hour_hand = clock_hand(length_hour)
 x_hour, y_hour = hour_hand(theta_hour)
@@ -48,9 +48,9 @@ x_values_sec = [point1_sec[0], point2_sec[0]]
 y_values_sec = [point1_sec[1], point2_sec[1]]
 
 # Plotting...
-matplotlib.pyplot.plot(x_values_hour, y_values_hour)
-matplotlib.pyplot.plot(x_values_min, y_values_min)
-matplotlib.pyplot.plot(x_values_sec, y_values_sec)
+matplotlib.pyplot.plot(x_values_hour, y_values_hour, linewidth=10)
+matplotlib.pyplot.plot(x_values_min, y_values_min, linewidth=7.5)
+matplotlib.pyplot.plot(x_values_sec, y_values_sec, linewidth=5.25)
 matplotlib.pyplot.axis('off')                           # Hide axes
 matplotlib.pyplot.axis([-3.25, 3.25, -3.25, 3.25])      # Set aspect ratio
 matplotlib.pyplot.show()

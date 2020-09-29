@@ -36,9 +36,9 @@ while True:
     theta_min = 90 - (6 * minute)
     theta_sec = 90 - (6 * second)
 
-    length_hour = 1.5
-    length_min = 2.7
-    length_sec = 2.5
+    length_hour = 1.7
+    length_min = 2.9
+    length_sec = 2.75
 
     hour_hand = clock_hand(length_hour)
     x_hour, y_hour = hour_hand(theta_hour)
@@ -62,9 +62,9 @@ while True:
     y_values_sec = [point1_sec[1], point2_sec[1]]
 
     # Plotting...
-    plt.plot(x_values_hour, y_values_hour)
-    plt.plot(x_values_min, y_values_min)
-    plt.plot(x_values_sec, y_values_sec)
+    plt.plot(x_values_hour, y_values_hour, linewidth=10)
+    plt.plot(x_values_min, y_values_min, linewidth=7.5)
+    plt.plot(x_values_sec, y_values_sec, linewidth=5.25)
     plt.axis('off')                        # Hides axes
     plt.axis([-3.25, 3.25, -3.25, 3.25])   # For consistent aspect ratio
     fig.canvas.draw()
