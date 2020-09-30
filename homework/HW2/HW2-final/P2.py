@@ -26,9 +26,9 @@ def dna_complement(sequence):
 # Demo of dna_complement(sequence)...
 valid_input = "aatTgGcC"
 invalid_input = "aatTgGzZ"
-print("Example input string: \"", valid_input, "\"", sep="")
-print("Complement is: \"", dna_complement(valid_input), "\"", sep="")
-print("Example input string: \"", invalid_input, "\"", sep="")
+print("Example input string:", valid_input)
+print("Complement is:", dna_complement(valid_input))
+print("Example input string:", invalid_input)
 print("Complement is:", dna_complement(invalid_input))
 
 

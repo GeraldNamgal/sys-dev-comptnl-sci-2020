@@ -11,11 +11,12 @@ print("This program causes an error because the 'balance' name gets "
       + "passed in to the outer function. This also changes the lexical scope "
       + "of 'balance' to within the scope of the inner function (i.e., it "
       + "becomes a local variable of the inner function block since it was "
-      + "redefined there) so the reference to the parameter 'balance' that was "
-      + "passed in to the outer function gets lost. Because the use of a name "
-      + "in Python is resolved using the nearest enclosing scope, an "
-      + "'UnboundLocalError' is thrown when the inner function is called "
-      + "because it attempts to use 'balance' before it has been defined.\n")
+      + "redefined there). Essentially, the reference to the parameter "
+      + "'balance' that was passed in to the outer function gets lost. And "
+      + "because the use of a name in Python is resolved using the nearest "
+      + "enclosing scope, an 'UnboundLocalError' is thrown when the inner "
+      + "'closure' function is called because it attempts to use 'balance' "
+      + "before it has been defined.\n")
 
 
 def make_withdrawal(balance):
