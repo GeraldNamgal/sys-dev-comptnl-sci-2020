@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from regression.Regression import Regression
+import regression.Regression as regr
 
-a = Regression()
+a = regr.Regression()
 a.hello_world()
