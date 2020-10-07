@@ -19,4 +19,7 @@ class Regression:
     def score(self, X, y):
         raise NotImplementedError("Method not implemented yet")
 
+    def hello_world(self):
+        print("Hello World")
+
 # TODO: Factor out common code back into base class when finished derived classes
