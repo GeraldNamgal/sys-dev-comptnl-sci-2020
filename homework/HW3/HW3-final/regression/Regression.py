@@ -40,7 +40,7 @@ class LinearRegression(Regression):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)       # Append column of ones to X
         # Ordinary Least Squares best fit coefficients equation aka 'beta_hat':
-        beta_hat = np.linalg.pinv(X.transpose().dot(X)).dot(X.transpose()).dot(y)
+        beta_hat = np.linalg.inv(X.transpose().dot(X)).dot(X.transpose()).dot(y)
         self.params['coeffs'] = beta_hat[1:]     # Non-first rows of matrix
         self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
 
@@ -48,6 +48,8 @@ class LinearRegression(Regression):
     def predict(self, X):
         prediction = self.params['intercept']
         for xi, bi in zip(X, self.params['coeffs']):
+            # TODO: Debugging
+            print('{0}, {1}', xi, bi)
             prediction += (bi * xi)
         return prediction
 
@@ -74,6 +76,13 @@ X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
                                                     dataset['target'],
                                                     test_size=0.2,
                                                     random_state=42)
+
+# Demo (from tutorial)
+model = LinearRegression()
+model.fit(X, y)
+print(model.get_params()['intercept'])
+print(model.get_params()['coeffs'])
+print(model.predict(X[0]))  # First row's predicted value (actual is first row's y value)
 
 
 # References:
