@@ -5,7 +5,7 @@ import types
 
 # Get and print all the functions of the Regression class
 attributes = dir(RegressionAlias)
-print("Functions in Regression class:")
+print('Functions in Regression class:')
 for attribute in attributes:
     if isinstance(getattr(RegressionAlias, attribute), types.FunctionType):
         print(attribute)

@@ -8,18 +8,37 @@ class Regression:
         return self.params
 
     def set_params(self, **kwargs):
-        raise NotImplementedError("Method not implemented yet")
+        raise NotImplementedError('Method not implemented yet')
 
     def fit(self, X, y):
-        raise NotImplementedError("Method not implemented yet")
+        raise NotImplementedError('Method not implemented yet')
 
     def predict(self, X):
-        raise NotImplementedError("Method not implemented yet")
+        raise NotImplementedError('Method not implemented yet')
 
     def score(self, X, y):
-        raise NotImplementedError("Method not implemented yet")
+        raise NotImplementedError('Method not implemented yet')
 
-    def hello_world(self):
-        print("Hello World")
+
+class LinearRegression(Regression):
+    def set_params(self, **kwargs):
+        # TODO
+        raise NotImplementedError('Method not implemented yet')
+
+    def fit(self, X, y):
+        # TODO
+        self.params['coeffs'] = "test_string"
+
+    def predict(self, X):
+        # TODO
+        raise NotImplementedError('Method not implemented yet')
+
+    def score(self, X, y):
+        # TODO
+        raise NotImplementedError('Method not implemented yet')
 
 # TODO: Factor out common code back into base class when finished derived classes
+
+
+a_test = LinearRegression()
+a_test.fit(6, 6)
