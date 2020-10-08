@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import numpy as np
+
 class Regression:
     def __init__(self):
         self.params = {}
@@ -19,6 +21,8 @@ class Regression:
     def score(self, X, y):
         raise NotImplementedError('Method not implemented yet')
 
+# TODO: Factor out common code back into base class when finished derived classes
+
 
 class LinearRegression(Regression):
     def set_params(self, **kwargs):
@@ -27,7 +31,7 @@ class LinearRegression(Regression):
 
     def fit(self, X, y):
         # TODO
-        self.params['coeffs'] = "test_string"
+        raise NotImplementedError('Method not implemented yet')
 
     def predict(self, X):
         # TODO
@@ -37,8 +41,18 @@ class LinearRegression(Regression):
         # TODO
         raise NotImplementedError('Method not implemented yet')
 
-# TODO: Factor out common code back into base class when finished derived classes
 
+arr = np.array([[0, 1, 2, 3], [1, 5, 3, 7], [1, 7, 3, 8], [9, 2, 4, 8], [5, 9, 1, 3]])
+print(arr)
+print()
+ones_col = np.ones(shape=arr.shape[0]).reshape(-1, 1)
+print(ones_col)
+print()
+catted = np.concatenate((ones_col, arr), 1)
+print(catted)
+print()
+appended = np.append(ones_col, arr, axis=1)
+print(appended)
 
-a_test = LinearRegression()
-a_test.fit(6, 6)
+# References:
+# - https://towardsdatascience.com/multiple-linear-regression-from-scratch-in-numpy-36a3e8ac8014
