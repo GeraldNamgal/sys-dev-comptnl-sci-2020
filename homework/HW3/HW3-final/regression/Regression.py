@@ -32,35 +32,18 @@ class LinearRegression(Regression):
 
     # TODO
     def fit(self, X, y):
-        # TODO: Need to reshape if one feature matrix or not? -- Peniel said don't need to
-        # Peniel also said you could print out y and X to see if need to but said after
-        # that no reshaping is necessary
-
-        if len(X.shape) == 1:
-            X = X.reshape(-1, 1)
-
-        [[1, 2, 3]]
-        -->
-        [[1],  # *** Do we have to reshape / What does this mean?
-         [2],
-         [3]]
-
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)
-
-        [[1 4],
-         [2 5],
-         [3 6]]
-        -->
-        [[1 1 4],  # *** Ones in first column ok?
-         [1 2 5],
-         [1 3 6]]
-
-        self.params['beta_0'] =\ # <-- Peniel said this is the intercept
-            np.linalg.pinv(X.transpose().dot(X)).dot()[0] # TODO: Finish this equation
-
-    self.params['coeffs'] = beta[1:]
-        # *** What is intercept? The ones column? <-- Peniel said first row is (use index)
+        beta_hat = np.linalg.pinv(X.transpose().dot(X)).dot(X.transpose()).dot(y)
+        # TODO: Debugging
+        print(beta_hat, '\n')
+        # Intercept can be thought of as beta_0
+        self.params['intercept'] = beta_hat[0]
+        # TODO: Debugging
+        print(self.params['intercept'], '\n')
+        self.params['coeffs'] = beta_hat[1:]
+        # TODO: Debugging
+        print(self.params['coeffs'])
 
     # TODO
     def predict(self, X):
@@ -70,6 +53,12 @@ class LinearRegression(Regression):
     def score(self, X, y):
         raise NotImplementedError('Method not implemented yet')
 
+
+# TODO: Debugging
+X = np.array([[0, 1, 2, 3], [1, 5, 3, 7], [1, 7, 3, 8], [9, 2, 4, 8], [5, 9, 1, 3]])
+y = np.array([[3],[7],[1],[6],[9]])
+regr = LinearRegression()
+regr.fit(X, y)
 
 # References:
 # - https://towardsdatascience.com/multiple-linear-regression-from-scratch-in-numpy-36a3e8ac8014
