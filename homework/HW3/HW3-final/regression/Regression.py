@@ -2,6 +2,7 @@
 
 import numpy as np
 
+
 class Regression:
     def __init__(self):
         self.params = {}
@@ -25,34 +26,28 @@ class Regression:
 
 
 class LinearRegression(Regression):
+    # TODO
     def set_params(self, **kwargs):
-        # TODO
         raise NotImplementedError('Method not implemented yet')
 
+    # TODO
     def fit(self, X, y):
-        # TODO
-        raise NotImplementedError('Method not implemented yet')
+        # TODO: Need to reshape if one feature matrix or not?
+        if len(X.shape) == 1:
+            X = X.reshape(-1, 1)
 
+        ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
+        X = np.append(ones_col, X, axis=1)
+        self.params['coeffs'] = X.transpose().dot(X) # TODO: Finish this equation
+
+    # TODO
     def predict(self, X):
-        # TODO
         raise NotImplementedError('Method not implemented yet')
 
+    # TODO
     def score(self, X, y):
-        # TODO
         raise NotImplementedError('Method not implemented yet')
 
-
-arr = np.array([[0, 1, 2, 3], [1, 5, 3, 7], [1, 7, 3, 8], [9, 2, 4, 8], [5, 9, 1, 3]])
-print(arr)
-print()
-ones_col = np.ones(shape=arr.shape[0]).reshape(-1, 1)
-print(ones_col)
-print()
-catted = np.concatenate((ones_col, arr), 1)
-print(catted)
-print()
-appended = np.append(ones_col, arr, axis=1)
-print(appended)
 
 # References:
 # - https://towardsdatascience.com/multiple-linear-regression-from-scratch-in-numpy-36a3e8ac8014
