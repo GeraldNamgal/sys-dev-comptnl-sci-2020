@@ -32,13 +32,35 @@ class LinearRegression(Regression):
 
     # TODO
     def fit(self, X, y):
-        # TODO: Need to reshape if one feature matrix or not?
+        # TODO: Need to reshape if one feature matrix or not? -- Peniel said don't need to
+        # Peniel also said you could print out y and X to see if need to but said after
+        # that no reshaping is necessary
+
         if len(X.shape) == 1:
             X = X.reshape(-1, 1)
 
+        [[1, 2, 3]]
+        -->
+        [[1],  # *** Do we have to reshape / What does this mean?
+         [2],
+         [3]]
+
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)
-        self.params['coeffs'] = X.transpose().dot(X) # TODO: Finish this equation
+
+        [[1 4],
+         [2 5],
+         [3 6]]
+        -->
+        [[1 1 4],  # *** Ones in first column ok?
+         [1 2 5],
+         [1 3 6]]
+
+        self.params['beta_0'] =\ # <-- Peniel said this is the intercept
+            np.linalg.pinv(X.transpose().dot(X)).dot()[0] # TODO: Finish this equation
+
+    self.params['coeffs'] = beta[1:]
+        # *** What is intercept? The ones column? <-- Peniel said first row is (use index)
 
     # TODO
     def predict(self, X):
