@@ -9,8 +9,9 @@ from sklearn.model_selection import train_test_split  # TODO: Goes in other file
 
 
 class Regression:
-    def __init__(self):
+    def __init__(self, alpha):
         self.params = {}
+        self.alpha = alpha
 
     def get_params(self):
         return self.params
@@ -40,17 +41,15 @@ class LinearRegression(Regression):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)       # Append column of ones to X
         # Ordinary Least Squares best fit coefficients equation aka 'beta_hat':
-        beta_hat = np.linalg.inv(X.transpose().dot(X)).dot(X.transpose()).dot(y)
+        beta_hat = np.linalg.pinv(X.transpose().dot(X)).dot(X.transpose()).dot(y)
         self.params['coeffs'] = beta_hat[1:]     # Non-first rows of matrix
         self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
 
     # TODO
-    def predict(self, X):
+    def predict(self, X):  # TODO: Change X to 'X_row' or 'row' or something?
         prediction = self.params['intercept']
-        for xi, bi in zip(X, self.params['coeffs']):
-            # TODO: Debugging
-            print('{0}, {1}', xi, bi)
-            prediction += (bi * xi)
+        for x, coeff in zip(X, self.params['coeffs']):
+            prediction += (x * coeff)
         return prediction
 
     # TODO
@@ -78,12 +77,21 @@ X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
                                                     random_state=42)
 
 # Demo (from tutorial)
-model = LinearRegression()
+model = LinearRegression(0.5)  # 0.5 is from hw
 model.fit(X, y)
 print(model.get_params()['intercept'])
 print(model.get_params()['coeffs'])
 print(model.predict(X[0]))  # First row's predicted value (actual is first row's y value)
 
+# Demo (from hw)
+alpha = 0.5
+models = [LinearRegression(alpha)]
+for model in models:
+    model.fit(X_train, y_train)
+
+print(np.identity(3).dot(.01))
+print(X.shape)
+print(X.transpose().dot(X).shape)
 
 # References:
 # - https://towardsdatascience.com/multiple-linear-regression-from-scratch-in-numpy-36a3e8ac8014
