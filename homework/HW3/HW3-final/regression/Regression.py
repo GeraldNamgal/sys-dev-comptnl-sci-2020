@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
+from sklearn import datasets  # TODO: Goes in other file
+from sklearn.model_selection import train_test_split  # TODO: Goes in other file
 import numpy as np
 import pandas as pd  # TODO: Delete later
 import warnings  # TODO: Delete later
 warnings.filterwarnings('ignore')  # TODO: Delete later
-from sklearn import datasets  # TODO: Goes in other file
-from sklearn.model_selection import train_test_split  # TODO: Goes in other file
 
 
 class Regression:
@@ -16,26 +16,32 @@ class Regression:
     def get_params(self):
         return self.params
 
+    # TODO: Done, just need to check that it works
     def set_params(self, **kwargs):
-        raise NotImplementedError('Method not implemented yet')
+        for key, value in kwargs:
+            if key in self.params:
+                self.params[key] = value
 
     def fit(self, X, y):
-        raise NotImplementedError('Method not implemented yet')
+        raise NotImplementedError('Method not implemented')
 
-    def predict(self, X):
-        raise NotImplementedError('Method not implemented yet')
+    def predict(self, X):  # TODO: Change X to 'X_row' or 'row' or something?
+        prediction = self.params['intercept']
+        for x, coeff in zip(X, self.params['coeffs']):
+            prediction += (x * coeff)
+        return prediction
 
+    # TODO
     def score(self, X, y):
-        raise NotImplementedError('Method not implemented yet')
+        ss_e = 0
+        ss_t = 0
+        r_squared = 1 - (ss_e / ss_t)
+        return r_squared
 
 # TODO: Factor out common code back into base class when finished derived classes
 
 
 class LinearRegression(Regression):
-    # TODO: Belongs in OLS or just Ridge?
-    def set_params(self, **kwargs):
-        raise NotImplementedError('Method not implemented yet')
-
     # TODO
     def fit(self, X, y):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
@@ -45,16 +51,18 @@ class LinearRegression(Regression):
         self.params['coeffs'] = beta_hat[1:]     # Non-first rows of matrix
         self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
 
-    # TODO
-    def predict(self, X):  # TODO: Change X to 'X_row' or 'row' or something?
-        prediction = self.params['intercept']
-        for x, coeff in zip(X, self.params['coeffs']):
-            prediction += (x * coeff)
-        return prediction
 
+class RidgeRegression(Regression):
     # TODO
-    def score(self, X, y):
-        raise NotImplementedError('Method not implemented yet')
+    def fit(self, X, y):
+        ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
+        X = np.append(ones_col, X, axis=1)       # Append column of ones to X
+        gamma = np.identity(X.shape[1]).dot(self.alpha)
+        tmp_matrix = np.add(X.transpose().dot(X), gamma.transpose().dot(gamma))
+        # Ridge Regression best fit coefficients equation aka 'beta_hat':
+        beta_hat = np.linalg.pinv(tmp_matrix).dot(X.transpose()).dot(y)
+        self.params['coeffs'] = beta_hat[1:]     # Non-first rows of matrix
+        self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
 
 
 # TODO: Debugging
@@ -89,9 +97,6 @@ models = [LinearRegression(alpha)]
 for model in models:
     model.fit(X_train, y_train)
 
-print(np.identity(3).dot(.01))
-print(X.shape)
-print(X.transpose().dot(X).shape)
 
 # References:
 # - https://towardsdatascience.com/multiple-linear-regression-from-scratch-in-numpy-36a3e8ac8014
