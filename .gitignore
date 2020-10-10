@@ -1,2 +1,3 @@
-homework/HW2/HW2-final/venv/
-homework/HW2/HW2-final/.idea/
+venv/
+.idea/
+__pycache__/
