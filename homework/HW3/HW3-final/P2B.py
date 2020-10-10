@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-from regression.Regression import Regression as RegressionAlias
+from regression.Regression import Regression as RegrClassAlias
 import types
 
 # Get and print all the functions of the Regression class
-attributes = dir(RegressionAlias)
+attributes = dir(RegrClassAlias)
 print('Functions in Regression class:')
 for attribute in attributes:
-    if isinstance(getattr(RegressionAlias, attribute), types.FunctionType):
+    if isinstance(getattr(RegrClassAlias, attribute), types.FunctionType):
         print(attribute)
 
 
