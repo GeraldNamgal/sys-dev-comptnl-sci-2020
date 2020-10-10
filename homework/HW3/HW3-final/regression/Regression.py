@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from sklearn import datasets  # TODO: Goes in other file
-from sklearn.model_selection import train_test_split  # TODO: Goes in other file
 import numpy as np
 
 
@@ -62,23 +60,6 @@ class RidgeRegression(Regression):
         beta_hat = np.linalg.pinv(tmp_matrix).dot(X.transpose()).dot(y)
         self.params['coeffs'] = beta_hat[1:]     # Non-first rows of matrix
         self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
-
-
-# TODO: Goes in other file when finished
-# Get Boston data
-dataset = datasets.load_boston()
-
-# Train-test split the data
-X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
-                                                    dataset['target'],
-                                                    test_size=0.2,
-                                                    random_state=42)
-
-# Score the models
-alpha = 0.1
-models = [LinearRegression(alpha)]
-for model in models:
-    model.fit(X_train, y_train)
 
 
 # References:
