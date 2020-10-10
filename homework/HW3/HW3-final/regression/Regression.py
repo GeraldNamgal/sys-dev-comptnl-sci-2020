@@ -29,16 +29,16 @@ class Regression:
             predictions.append(prediction)
         return predictions                    # Return array of predictions
 
-    # TODO
+    # TODO: Done, just need to check that it works
     def score(self, X, y):
-        # TODO: Get predictions
+        ss_t = 0                              # Getting SS_t...
         y_bar = np.mean(y)                    # Get mean of original data values
-        ss_t = 0                              # Get SS_t...
         for y_value in y:
             ss_t += (y_value - y_bar) ** 2
-        ss_e = 0                              # Get SS_e...
-        for y_value, row in zip(y, X):
-            ss_e += (y_value - self.predict(row)) ** 2
+        ss_e = 0                              # Getting SS_e...
+        predictions = self.predict(X)         # Get predictions
+        for y_value, prediction in zip(y, predictions):
+            ss_e += (y_value - prediction) ** 2
         return 1 - (ss_e / ss_t)              # Return R-squared
 
 
