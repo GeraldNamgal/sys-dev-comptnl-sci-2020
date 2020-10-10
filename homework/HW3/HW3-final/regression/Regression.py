@@ -27,7 +27,6 @@ class Regression:
             predictions.append(prediction)
         return predictions                    # Return array of predictions
 
-    # TODO: Done, just need to check that it works
     def score(self, X, y):
         ss_t = 0                              # Getting SS_t...
         y_bar = np.mean(y)                    # Get mean of original data values
