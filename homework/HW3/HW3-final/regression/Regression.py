@@ -7,22 +7,19 @@ import numpy as np
 
 class Regression:
     def __init__(self, alpha):
-        self.params = {}
-        self.alpha = alpha
+        self.params = {'alpha': alpha}
 
     def get_params(self):
         return self.params
 
-    # TODO: Done, just need to check that it works
     def set_params(self, **kwargs):
-        for key, value in kwargs:
+        for key, value in kwargs.items():
             if key in self.params:
                 self.params[key] = value
 
     def fit(self, X, y):
         raise NotImplementedError('Method not implemented')
 
-    # TODO: Done, just need to check that works
     def predict(self, X):
         predictions = []
         for row in X:
@@ -59,7 +56,7 @@ class RidgeRegression(Regression):
     def fit(self, X, y):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)       # Append column of ones to X
-        gamma = np.identity(X.shape[1]).dot(self.alpha)
+        gamma = np.identity(X.shape[1]).dot(self.params['alpha'])
         tmp_matrix = np.add(X.transpose().dot(X), gamma.transpose().dot(gamma))
         # Ridge Regression best fit coefficients equation aka 'beta_hat':
         beta_hat = np.linalg.pinv(tmp_matrix).dot(X.transpose()).dot(y)
@@ -70,20 +67,12 @@ class RidgeRegression(Regression):
 # TODO: Goes in other file when finished
 # Get Boston data
 dataset = datasets.load_boston()
-print(dataset['data'], '\n')
-print(dataset['target'], '\n')
 
 # Train-test split the data
 X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
                                                     dataset['target'],
                                                     test_size=0.2,
                                                     random_state=42)
-
-# Demo (from tutorial)
-model = LinearRegression(0.1)
-model.fit(dataset['data'], dataset['target'])
-arr = model.predict(dataset['data'])
-print(arr)  # Predicted values
 
 # Score the models
 alpha = 0.1
