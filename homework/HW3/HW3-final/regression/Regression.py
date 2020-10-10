@@ -3,9 +3,6 @@
 from sklearn import datasets  # TODO: Goes in other file
 from sklearn.model_selection import train_test_split  # TODO: Goes in other file
 import numpy as np
-import pandas as pd  # TODO: Delete later
-import warnings  # TODO: Delete later
-warnings.filterwarnings('ignore')  # TODO: Delete later
 
 
 class Regression:
@@ -25,14 +22,19 @@ class Regression:
     def fit(self, X, y):
         raise NotImplementedError('Method not implemented')
 
-    def predict(self, row):  # TODO: Change X to 'X_row' or 'row' or something?
-        prediction = self.params['intercept']
-        for element, coeff in zip(row, self.params['coeffs']):
-            prediction += (element * coeff)
-        return prediction
+    # TODO: Done, just need to check that works
+    def predict(self, X):
+        predictions = []
+        for row in X:
+            prediction = self.params['intercept']
+            for element, coeff in zip(row, self.params['coeffs']):
+                prediction += (element * coeff)
+            predictions.append(prediction)
+        return predictions                    # Return array of predictions
 
     # TODO
     def score(self, X, y):
+        # TODO: Get predictions
         y_bar = np.mean(y)                    # Get mean of original data values
         ss_t = 0                              # Get SS_t...
         for y_value in y:
@@ -65,33 +67,25 @@ class RidgeRegression(Regression):
         self.params['intercept'] = beta_hat[0]   # Intercept is also 'beta_0'
 
 
-# TODO: Debugging
-# Get Boston data using pandas
-boston = pd.read_csv('https://raw.githubusercontent.com/selva86/datasets/master/BostonHousing.csv')
-print(boston.head(), '\n')
-X = boston.drop('medv', axis=1).values
-y = boston['medv'].values
-print(X, '\n')
-print(y, '\n')
-
-# Get Boston data using hw instructions
+# TODO: Goes in other file when finished
+# Get Boston data
 dataset = datasets.load_boston()
 print(dataset['data'], '\n')
 print(dataset['target'], '\n')
 
+# Train-test split the data
 X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
                                                     dataset['target'],
                                                     test_size=0.2,
                                                     random_state=42)
 
 # Demo (from tutorial)
-model = LinearRegression(0.5)  # 0.5 is from hw
-model.fit(X, y)
-print(model.get_params()['intercept'], '\n')
-print(model.get_params()['coeffs'], '\n')
-print(model.predict(X[0]))  # First row's predicted value (actual is first row's y value)
+model = LinearRegression(0.1)
+model.fit(dataset['data'], dataset['target'])
+arr = model.predict(dataset['data'])
+print(arr)  # Predicted values
 
-# Demo (from hw)
+# Score the models
 alpha = 0.1
 models = [LinearRegression(alpha)]
 for model in models:
