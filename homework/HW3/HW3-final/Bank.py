@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-from enum import Enum  # TODO: Enum warm-up (delete later)
+from enum import Enum
 
 
-class AccountType(Enum):  # TODO: Enum warm-up (delete later)
+class AccountType(Enum):
     SAVINGS = 1
     CHECKING = 2
 
@@ -16,7 +16,7 @@ print(AccountType.SAVINGS.name)
 
 
 class BankAccount:
-    def __init__(self, owner, accountType):
+    def __init__(self, owner, accountType: AccountType):
         self.owner = owner
         self.accountType = accountType
         self.balance = 0
@@ -29,7 +29,8 @@ class BankAccount:
                 raise ValueError('please enter a non-negative amount')
         except ValueError as err:
             print("ERROR:", err)
-        # TODO -- else:
+        else:
+            self.balance -= amount
 
     def deposit(self, amount):
         try:
@@ -37,10 +38,62 @@ class BankAccount:
                 raise ValueError('please enter a non-negative amount')
         except ValueError as err:
             print("ERROR:", err)
-        # TODO -- else:
+        else:
+            self.balance += amount
 
     def __str__(self):
         return 'This account belongs to {0}'.format(self.owner)
 
     def __len__(self):
         return self.balance
+
+
+class BankUser:
+    def __init__(self, owner):
+        self.owner = owner
+        self.accounts = {}
+
+    def addAccount(self, accountType):
+        limitedAcctTypes = [AccountType.SAVINGS, AccountType.CHECKING]
+        try:
+            if accountType in limitedAcctTypes:
+                for account_key in self.accounts:
+                    if account_key == accountType:
+                        raise ValueError(f'can only have one {accountType.name} account')
+        except ValueError as err:
+            print("ERROR:", err)
+        else:
+            self.accounts[accountType] = BankAccount(self.owner, accountType)
+
+    def getBalance(self, accountType):
+        try:
+            if accountType not in self.accounts:
+                raise ValueError(f'that account does not exist')
+        except ValueError as err:
+            print("ERROR:", err)
+        else:
+            return len(self.accounts[accountType])
+
+    def deposit(self, accountType, amount):
+        try:
+            if accountType not in self.accounts:
+                raise ValueError(f'that account does not exist')
+        except ValueError as err:
+            print("ERROR:", err)
+        else:
+            self.accounts[accountType].deposit(amount)
+
+    def withdraw(self, accountType, amount):
+        try:
+            if accountType not in self.accounts:
+                raise ValueError(f'that account does not exist')
+        except ValueError as err:
+            print("ERROR:", err)
+        else:
+            self.accounts[accountType].withdraw(amount)
+
+    def __str__(self):
+        info = 'User has the following accounts:\n'
+        for account in self.accounts:
+            info += '{0}\n'.format(account.name)
+        return info
