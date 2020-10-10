@@ -25,24 +25,25 @@ class Regression:
     def fit(self, X, y):
         raise NotImplementedError('Method not implemented')
 
-    def predict(self, X):  # TODO: Change X to 'X_row' or 'row' or something?
+    def predict(self, row):  # TODO: Change X to 'X_row' or 'row' or something?
         prediction = self.params['intercept']
-        for x, coeff in zip(X, self.params['coeffs']):
-            prediction += (x * coeff)
+        for element, coeff in zip(row, self.params['coeffs']):
+            prediction += (element * coeff)
         return prediction
 
     # TODO
     def score(self, X, y):
-        ss_e = 0
-        ss_t = 0
-        r_squared = 1 - (ss_e / ss_t)
-        return r_squared
-
-# TODO: Factor out common code back into base class when finished derived classes
+        y_bar = np.mean(y)                    # Get mean of original data values
+        ss_t = 0                              # Get SS_t...
+        for y_value in y:
+            ss_t += (y_value - y_bar) ** 2
+        ss_e = 0                              # Get SS_e...
+        for y_value, row in zip(y, X):
+            ss_e += (y_value - self.predict(row)) ** 2
+        return 1 - (ss_e / ss_t)              # Return R-squared
 
 
 class LinearRegression(Regression):
-    # TODO
     def fit(self, X, y):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)       # Append column of ones to X
@@ -53,7 +54,6 @@ class LinearRegression(Regression):
 
 
 class RidgeRegression(Regression):
-    # TODO
     def fit(self, X, y):
         ones_col = np.ones(shape=X.shape[0]).reshape(-1, 1)
         X = np.append(ones_col, X, axis=1)       # Append column of ones to X
@@ -87,12 +87,12 @@ X_train, X_test, y_train, y_test = train_test_split(dataset['data'],
 # Demo (from tutorial)
 model = LinearRegression(0.5)  # 0.5 is from hw
 model.fit(X, y)
-print(model.get_params()['intercept'])
-print(model.get_params()['coeffs'])
+print(model.get_params()['intercept'], '\n')
+print(model.get_params()['coeffs'], '\n')
 print(model.predict(X[0]))  # First row's predicted value (actual is first row's y value)
 
 # Demo (from hw)
-alpha = 0.5
+alpha = 0.1
 models = [LinearRegression(alpha)]
 for model in models:
     model.fit(X_train, y_train)
