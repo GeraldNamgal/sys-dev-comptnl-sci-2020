@@ -24,9 +24,9 @@ class BankAccount:
     def withdraw(self, amount):
         try:
             if self.balance - amount < 0:
-                raise ValueError('insufficient funds for withdrawal amount')
+                raise ValueError('Balance is less than withdrawal amount entered')
             if amount < 0:
-                raise ValueError('please enter a non-negative amount')
+                raise ValueError('Withdrawal requires a non-negative amount')
         except Exception:
             raise
         else:
@@ -35,7 +35,7 @@ class BankAccount:
     def deposit(self, amount):
         try:
             if amount < 0:
-                raise ValueError('please enter a non-negative amount')
+                raise ValueError('Deposit requires a non-negative amount')
         except Exception:
             raise
         else:
@@ -60,7 +60,7 @@ class BankUser:
             if accountType in limitedAcctTypes:
                 for account_key in self.accounts:
                     if account_key == accountType:
-                        raise ValueError(f'can only have one {accountType.name}'
+                        raise ValueError(f'Can only have one {accountType.name}'
                                          f' account')
         except Exception:
             raise
@@ -70,7 +70,7 @@ class BankUser:
     def getBalance(self, accountType):
         try:
             if accountType not in self.accounts:
-                raise ValueError(f'that account does not exist')
+                raise ValueError(f'That account does not exist; cannot get balance')
         except Exception:
             raise
         else:
@@ -79,7 +79,7 @@ class BankUser:
     def deposit(self, accountType, amount):
         try:
             if accountType not in self.accounts:
-                raise ValueError(f'that account does not exist')
+                raise ValueError(f'That account does not exist; cannot deposit')
         except Exception:
             raise
         else:
@@ -88,18 +88,17 @@ class BankUser:
     def withdraw(self, accountType, amount):
         try:
             if accountType not in self.accounts:
-                raise ValueError(f'that account does not exist')
+                raise ValueError(f'That account does not exist; cannot withdraw')
         except Exception:
             raise
         else:
             self.accounts[accountType].withdraw(amount)
 
     def __str__(self):
-        info = 'User has the following accounts:\n'
+        info = 'User has the following accounts:'
         for account in self.accounts:
-            info += '{0}\n'.format(account.name)
+            info += '\n{0}'.format(account.name)
         return info
 
 
-# TODO: Test BankUser's str function
-# TODO: Test overall functioning, transactions work, etc.
+# TODO: Test BankUser's str function and overall functioning as defined in hw (interface, etc.)
