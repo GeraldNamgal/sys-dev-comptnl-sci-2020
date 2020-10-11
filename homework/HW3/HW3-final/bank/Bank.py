@@ -56,12 +56,12 @@ class BankUser:
     def __init__(self, owner):
         self.owner = owner
         self.accounts = {}
+        self.limitedAcctTypes = [AccountType.SAVINGS, AccountType.CHECKING]
 
     def addAccount(self, accountType):
-        limitedAcctTypes = [AccountType.SAVINGS, AccountType.CHECKING]
         try:
-            if accountType in limitedAcctTypes:
-                for account_key in self.accounts:
+            if accountType in self.limitedAcctTypes:   # Only one type allowed?
+                for account_key in self.accounts:      # Check if already exists
                     if account_key == accountType:
                         raise ValueError(f'Can only have one {accountType.name}'
                                          f' account; account not created')
@@ -99,8 +99,11 @@ class BankUser:
 
     def __str__(self):
         info = 'User has the following accounts:'
-        for account in self.accounts:
-            info += '\n{0}'.format(account.name)
+        if not self.accounts:
+            info += '\nNone'
+        else:
+            for account in self.accounts:
+                info += '\n{0}'.format(account.name)
         return info
 
 

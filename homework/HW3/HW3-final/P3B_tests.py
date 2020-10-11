@@ -42,6 +42,9 @@ def test_duplicate_accounts():
         user.addAccount(bank.AccountType.CHECKING)
     except Exception as e:
         print('Error:', e)
+    # Should still able to access already existing accounts (with no error) --
+    user.deposit(bank.AccountType.SAVINGS, 10)
+    user.deposit(bank.AccountType.CHECKING, 10)
 
 
 # Test if account doesn't exist for balance requests, withdrawing, and depositing
@@ -66,3 +69,47 @@ test_over_withdrawal()
 test_negative_amount()
 test_duplicate_accounts()
 test_account_exists()
+
+
+# TODO: Debugging only some things for better understanding
+
+print()
+
+# -- BankAccount() --
+
+# Check that __str__ works
+a = bank.BankAccount("Joe", bank.AccountType.CHECKING)
+print(a)
+
+# Check that __len__ works
+print(len(a))  # Should be 0
+
+# Check deposit() and withdraw()
+a.withdraw(0)  # Should not produce an error
+a.deposit(10)
+print(len(a))
+a.withdraw(5)
+print(len(a))  # Should be 5
+
+print()
+
+# -- BankUser() --
+
+# Check that __str__ works
+user = bank.BankUser("Joe")
+print(user)  # Should show no accounts
+user.addAccount(bank.AccountType.SAVINGS)
+user.addAccount(bank.AccountType.CHECKING)
+print(user)  # Should show some accounts
+
+# Check getBalance(), deposit(), and withdraw()
+print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 0
+print(user.getBalance(bank.AccountType.CHECKING))
+user.deposit(bank.AccountType.SAVINGS, 10)
+user.deposit(bank.AccountType.CHECKING, 10)
+print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 10
+print(user.getBalance(bank.AccountType.CHECKING))
+user.withdraw(bank.AccountType.SAVINGS, 4)
+user.withdraw(bank.AccountType.CHECKING, 4)
+print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 6
+print(user.getBalance(bank.AccountType.CHECKING))
