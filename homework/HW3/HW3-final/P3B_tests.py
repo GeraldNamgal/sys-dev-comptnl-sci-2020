@@ -29,5 +29,23 @@ def test_negative_amount():
         print('Error message:', e)
 
 
+# Test for duplicate attempts to create a savings and checking account
+def test_duplicate_accounts():
+    user = bank.BankUser("Joe")
+    user.addAccount(bank.AccountType.SAVINGS)
+    user.addAccount(bank.AccountType.CHECKING)
+    try:
+        user.addAccount(bank.AccountType.SAVINGS)
+    except Exception as e:
+        print('Error message:', e)
+    try:
+        user.addAccount(bank.AccountType.CHECKING)
+    except Exception as e:
+        print('Error message:', e)
+
+
+# Test for if account doesn't exist for balance requests, withdrawing, and depositing
+
 test_over_withdrawal()
 test_negative_amount()
+test_duplicate_accounts()

@@ -15,8 +15,6 @@ class AccountType(Enum):
 # print(AccountType.SAVINGS.name)
 
 
-# TODO: Don't catch exceptions, just raise them?
-
 class BankAccount:
     def __init__(self, owner, accountType: AccountType):
         self.owner = owner
@@ -44,7 +42,8 @@ class BankAccount:
             self.balance += amount
 
     def __str__(self):
-        return 'This {0} account belongs to {1}'.format(self.accountType.name, self.owner)
+        return 'This {0} account belongs to {1}'.format(self.accountType.name,
+                                                        self.owner)
 
     def __len__(self):
         return self.balance
@@ -61,7 +60,8 @@ class BankUser:
             if accountType in limitedAcctTypes:
                 for account_key in self.accounts:
                     if account_key == accountType:
-                        raise ValueError(f'can only have one {accountType.name} account')
+                        raise ValueError(f'can only have one {accountType.name}'
+                                         f' account')
         except Exception:
             raise
         else:
@@ -99,3 +99,7 @@ class BankUser:
         for account in self.accounts:
             info += '{0}\n'.format(account.name)
         return info
+
+
+# TODO: Test BankUser's str function
+# TODO: Test overall functioning, transactions work, etc.
