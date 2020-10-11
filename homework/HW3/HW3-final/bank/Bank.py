@@ -24,9 +24,11 @@ class BankAccount:
     def withdraw(self, amount):
         try:
             if self.balance - amount < 0:
-                raise ValueError('Balance is less than withdrawal amount entered')
+                raise ValueError('Balance is less than withdrawal amount '
+                                 'entered; withdrawal cancelled')
             if amount < 0:
-                raise ValueError('Withdrawal requires a non-negative amount')
+                raise ValueError('Withdrawal requires a non-negative amount; '
+                                 'withdrawal cancelled')
         except Exception:
             raise
         else:
@@ -35,7 +37,8 @@ class BankAccount:
     def deposit(self, amount):
         try:
             if amount < 0:
-                raise ValueError('Deposit requires a non-negative amount')
+                raise ValueError('Deposit requires a non-negative amount; '
+                                 'deposit cancelled')
         except Exception:
             raise
         else:
@@ -61,7 +64,7 @@ class BankUser:
                 for account_key in self.accounts:
                     if account_key == accountType:
                         raise ValueError(f'Can only have one {accountType.name}'
-                                         f' account')
+                                         f' account; account not created')
         except Exception:
             raise
         else:

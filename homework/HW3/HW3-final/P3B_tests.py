@@ -3,7 +3,7 @@
 import bank.Bank as bank
 
 
-# Test for trying to withdraw more than balance
+# Test if trying to withdraw more than balance
 def test_over_withdrawal():
     user = bank.BankUser("Joe")
     user.addAccount(bank.AccountType.SAVINGS)
@@ -14,7 +14,7 @@ def test_over_withdrawal():
         print('Error:', e)
 
 
-# Test for withdrawing and depositing a negative amount
+# Test if withdrawing and depositing a negative amount
 def test_negative_amount():
     user = bank.BankUser("Joe")
     user.addAccount(bank.AccountType.SAVINGS)
@@ -29,7 +29,7 @@ def test_negative_amount():
         print('Error:', e)
 
 
-# Test for duplicate attempts to create a savings and checking account
+# Test if duplicate attempts to create a savings and checking account
 def test_duplicate_accounts():
     user = bank.BankUser("Joe")
     user.addAccount(bank.AccountType.SAVINGS)
@@ -44,7 +44,7 @@ def test_duplicate_accounts():
         print('Error:', e)
 
 
-# Test for if account doesn't exist for balance requests, withdrawing, and depositing
+# Test if account doesn't exist for balance requests, withdrawing, and depositing
 def test_account_exists():
     user = bank.BankUser("Joe")
     try:
