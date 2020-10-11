@@ -71,7 +71,8 @@ test_duplicate_accounts()
 test_account_exists()
 
 
-# TODO: Debugging only some things for better understanding
+# TODO: I think need to include further tests to show per hw (maybe use functions, etc.)\
+# TODO: but I think just for the BankUser class (could call BankAccount methods from user)
 
 print()
 
@@ -103,13 +104,13 @@ user.addAccount(bank.AccountType.CHECKING)
 print(user)  # Should show some accounts
 
 # Check getBalance(), deposit(), and withdraw()
-print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 0
-print(user.getBalance(bank.AccountType.CHECKING))
+print(user.getBalance(bank.AccountType.SAVINGS))   # Should show 0
+print(user.getBalance(bank.AccountType.CHECKING))  # Should show 0
 user.deposit(bank.AccountType.SAVINGS, 10)
 user.deposit(bank.AccountType.CHECKING, 10)
-print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 10
-print(user.getBalance(bank.AccountType.CHECKING))
+print(user.getBalance(bank.AccountType.SAVINGS))   # Should show 10
+print(user.getBalance(bank.AccountType.CHECKING))  # Should show 10
 user.withdraw(bank.AccountType.SAVINGS, 4)
 user.withdraw(bank.AccountType.CHECKING, 4)
-print(user.getBalance(bank.AccountType.SAVINGS))  # Should show 6
-print(user.getBalance(bank.AccountType.CHECKING))
+print(user.getBalance(bank.AccountType.SAVINGS))   # Should show 6
+print(user.getBalance(bank.AccountType.CHECKING))  # Should show 6
