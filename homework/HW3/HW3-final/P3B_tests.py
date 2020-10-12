@@ -72,7 +72,8 @@ test_account_exists()
 
 
 # TODO: I think need to include further tests to show per hw (maybe use functions, etc.)\
-# TODO: but I think just for the BankUser class (could call BankAccount methods from user)
+# TODO: but I think just for the BankUser class (could call BankAccount methods from user).\
+# TODO: Maybe also use self.assertTrue stuff (https://stackoverflow.com/questions/4541155/check-if-a-number-is-int-or-float)
 
 print()
 

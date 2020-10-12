@@ -58,6 +58,7 @@ class BankUser:
         self.accounts = {}
         self.limitedAcctTypes = [AccountType.SAVINGS, AccountType.CHECKING]
 
+    # TODO: Could have a message like 'creating account...'?
     def addAccount(self, accountType):
         try:
             if accountType in self.limitedAcctTypes:   # Only one type allowed?
@@ -106,5 +107,79 @@ class BankUser:
                 info += '\n{0}'.format(account.name)
         return info
 
+    def getAccounts(self):
+        return self.accounts
 
 # TODO: Test BankUser's str function and overall functioning as defined in hw (interface, etc.)
+
+
+def ATMSession(bankUser: BankUser):
+    def Interface():
+
+        # TODO: Need to make sure choices are valid?
+
+        while True:
+            print(f'Enter Option:\n'
+                  f'1)Exit\n'
+                  f'2)Create Account\n'
+                  f'3)Check Balance\n'
+                  f'4)Deposit\n'
+                  f'5)Withdraw')
+            choice1 = input()
+            if not choice1.isnumeric():
+                print('-- Invalid Choice; Try Again --')
+                continue
+            choice1 = int(choice1)
+            if choice1 == 1:
+                break
+            elif 2 <= choice1 <= 5:
+                print(f'Enter Option:\n'
+                      f'1)Checking\n'
+                      f'2)Savings')
+                choice2 = input()
+                if not choice2.isnumeric():
+                    print('-- Invalid Choice; Try Again --')
+                    continue
+                choice2 = int(choice2)
+                if 1 <= choice2 <= 2:
+                    if choice1 == 2 and choice2 == 1:
+                        bankUser.addAccount(AccountType.CHECKING)
+                    elif choice1 == 2 and choice2 == 2:
+                        bankUser.addAccount(AccountType.SAVINGS)
+                    elif choice1 == 3 and choice2 == 1:
+                        print('BALANCE:', bankUser.getBalance(AccountType.CHECKING))
+                    elif choice1 == 3 and choice2 == 2:
+                        print('BALANCE:', bankUser.getBalance(AccountType.SAVINGS))
+                    elif 4 <= choice1 <= 5:
+                        print(f'Enter Integer Amount, Cannot Be Negative:')
+                        amount = input()
+                        if not amount.isnumeric():
+                            print('-- Invalid Amount; Try Again --')
+                            continue
+                        amount = int(amount)
+                        if choice1 == 4 and choice2 == 1:
+                            bankUser.deposit(AccountType.CHECKING, amount)
+                        elif choice1 == 4 and choice2 == 2:
+                            bankUser.deposit(AccountType.SAVINGS, amount)
+                        elif choice1 == 5 and choice2 == 1:
+                            bankUser.withdraw(AccountType.CHECKING, amount)
+                        elif choice1 == 5 and choice2 == 2:
+                            bankUser.withdraw(AccountType.SAVINGS, amount)
+                else:
+                    print('-- Invalid Choice; Try Again --')
+            else:
+                print('-- Invalid Choice; Try Again --')
+    return Interface
+
+# TODO: Could try < > brackets around 'Invalid Choice'
+
+
+# TODO: Demoing...
+user = BankUser("Joe")
+interface = ATMSession(user)
+interface()
+
+
+# References:
+# - https://help.semmle.com/wiki/pages/viewpage.action?pageId=29394142
+# - https://www.geeksforgeeks.org/python-string-isnumeric-application/
