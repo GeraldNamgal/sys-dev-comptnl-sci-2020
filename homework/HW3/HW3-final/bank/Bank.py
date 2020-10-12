@@ -74,7 +74,8 @@ class BankUser:
     def getBalance(self, accountType):
         try:
             if accountType not in self.accounts:
-                raise ValueError(f'That account does not exist; cannot get balance')
+                raise ValueError(f'That account does not exist; '
+                                 f'cannot get balance')
         except Exception:
             raise
         else:
@@ -92,7 +93,8 @@ class BankUser:
     def withdraw(self, accountType, amount):
         try:
             if accountType not in self.accounts:
-                raise ValueError(f'That account does not exist; cannot withdraw')
+                raise ValueError(f'That account does not exist; '
+                                 f'cannot withdraw')
         except Exception:
             raise
         else:
@@ -107,6 +109,7 @@ class BankUser:
                 info += '\n{0}'.format(account.name)
         return info
 
+    # TODO: Delete this or use?
     def getAccounts(self):
         return self.accounts
 
@@ -147,9 +150,11 @@ def ATMSession(bankUser: BankUser):
                     elif choice1 == 2 and choice2 == 2:
                         bankUser.addAccount(AccountType.SAVINGS)
                     elif choice1 == 3 and choice2 == 1:
-                        print('BALANCE:', bankUser.getBalance(AccountType.CHECKING))
+                        print('BALANCE:',
+                              bankUser.getBalance(AccountType.CHECKING))
                     elif choice1 == 3 and choice2 == 2:
-                        print('BALANCE:', bankUser.getBalance(AccountType.SAVINGS))
+                        print('BALANCE:',
+                              bankUser.getBalance(AccountType.SAVINGS))
                     elif 4 <= choice1 <= 5:
                         print(f'Enter Integer Amount, Cannot Be Negative:')
                         amount = input()
