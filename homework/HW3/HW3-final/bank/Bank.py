@@ -6,7 +6,7 @@ from enum import Enum
 class AccountType(Enum):
     SAVINGS = 1
     CHECKING = 2
-    
+
 
 class BankAccount:
     def __init__(self, owner, accountType: AccountType):
@@ -93,7 +93,7 @@ class BankUser:
             self.accounts[accountType].withdraw(amount)
 
     def __str__(self):
-        info = 'User has the following accounts:'
+        info = f'{self.owner} has the following accounts:'
         if not self.accounts:
             info += '\nNone'
         else:
@@ -190,10 +190,10 @@ def ATMSession(bankUser: BankUser):
     return Interface
 
 
-# TODO: Demoing...
-user = BankUser("Joe")
-interface = ATMSession(user)
-interface()
+# # TODO: Demoing...
+# user = BankUser("Joe")
+# interface = ATMSession(user)
+# interface()
 
 
 # References:
