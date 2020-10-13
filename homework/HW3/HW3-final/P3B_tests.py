@@ -47,7 +47,7 @@ def test_duplicate_accounts():
     user.deposit(bank.AccountType.CHECKING, 10)
 
 
-# Test if account doesn't exist for balance requests, withdrawing, and depositing
+# Test if account doesn't exist for getBalance, withdraw, and deposit
 def test_account_exists():
     user = bank.BankUser('Joe')
     try:
