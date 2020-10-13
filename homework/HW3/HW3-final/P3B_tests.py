@@ -79,7 +79,6 @@ test_account_exists()
 
 # Additional tests
 print('\nADDITIONAL TESTS -- \n')
-
 # BankAccount class
 print('BankAccount class:')
 account = bank.BankAccount('Joe', bank.AccountType.CHECKING)
@@ -87,7 +86,6 @@ print(f'- Created \'account\' via calling BankAccount(\'Joe\', '
       f'bank.AccountType.CHECKING)')
 print(f'- Calling print(account) returns...')
 print(account)              # Check that __str__ works
-
 # BankUser class
 print('\nBankUser class:')
 user = bank.BankUser('Joe')
