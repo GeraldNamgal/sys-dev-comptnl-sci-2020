@@ -64,8 +64,8 @@ def test_account_exists():
         print(e)
 
 
-# Call error exception test functions
-print('ERROR EXCEPTION TESTS -- \n')
+# Call exception error test functions
+print('EXCEPTION ERROR TESTS -- \n')
 print('- Calling test_over_withdrawal() returns...')
 test_over_withdrawal()
 print('- Calling test_negative_amount() returns...')
@@ -74,8 +74,6 @@ print('- Calling test_duplicate_accounts() returns...')
 test_duplicate_accounts()
 print('- Calling test_account_exists() returns...')
 test_account_exists()
-
-# TODO: Fix commenting to make sense
 
 # Additional tests
 print('\nADDITIONAL TESTS -- \n')
@@ -118,3 +116,5 @@ print(f'- SAVINGS balance is: '
       f'{user.getBalance(bank.AccountType.SAVINGS)}')   # Should show 6
 print(f'- CHECKING balance is: '
       f'{user.getBalance(bank.AccountType.CHECKING)}')  # Should show 6
+
+# TODO: Fix commenting to make sense, wherever
