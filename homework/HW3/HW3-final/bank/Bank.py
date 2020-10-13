@@ -6,14 +6,7 @@ from enum import Enum
 class AccountType(Enum):
     SAVINGS = 1
     CHECKING = 2
-
-
-# TODO: Enum warm-up (delete later)
-# print(AccountType.SAVINGS)  # <-- Python representation for an enum
-# print(AccountType.SAVINGS == AccountType.SAVINGS)
-# print(AccountType.SAVINGS == AccountType.CHECKING)
-# print(AccountType.SAVINGS.name)
-
+    
 
 class BankAccount:
     def __init__(self, owner, accountType: AccountType):
@@ -58,7 +51,6 @@ class BankUser:
         self.accounts = {}
         self.limitedAcctTypes = [AccountType.SAVINGS, AccountType.CHECKING]
 
-    # TODO: Could have a message like 'creating account...'?
     def addAccount(self, accountType):
         try:
             if accountType in self.limitedAcctTypes:   # Only one type allowed?
@@ -109,18 +101,9 @@ class BankUser:
                 info += '\n{0}'.format(account.name)
         return info
 
-    # TODO: Delete this or use?
-    def getAccounts(self):
-        return self.accounts
-
-# TODO: Test BankUser's str function and overall functioning as defined in hw (interface, etc.)
-
 
 def ATMSession(bankUser: BankUser):
     def Interface():
-
-        # TODO: Need to make sure choices are valid?
-
         while True:
             print(f'Enter Option:\n'
                   f'1)Exit\n'
@@ -130,7 +113,7 @@ def ATMSession(bankUser: BankUser):
                   f'5)Withdraw')
             choice1 = input()
             if not choice1.isnumeric():
-                print('-- Invalid Choice; Try Again --')
+                print('\nERROR: Invalid Choice. Try Again --\n')
                 continue
             choice1 = int(choice1)
             if choice1 == 1:
@@ -141,42 +124,70 @@ def ATMSession(bankUser: BankUser):
                       f'2)Savings')
                 choice2 = input()
                 if not choice2.isnumeric():
-                    print('-- Invalid Choice; Try Again --')
+                    print('\nERROR: Invalid Choice. Try Again --\n')
                     continue
                 choice2 = int(choice2)
                 if 1 <= choice2 <= 2:
                     if choice1 == 2 and choice2 == 1:
-                        bankUser.addAccount(AccountType.CHECKING)
+                        try:
+                            bankUser.addAccount(AccountType.CHECKING)
+                            print(f'\nACCOUNT CREATED\n')
+                        except Exception as err:
+                            print(f'\nERROR: {err}. Try again --\n')
                     elif choice1 == 2 and choice2 == 2:
-                        bankUser.addAccount(AccountType.SAVINGS)
+                        try:
+                            bankUser.addAccount(AccountType.SAVINGS)
+                            print(f'\nACCOUNT CREATED\n')
+                        except Exception as err:
+                            print(f'\nERROR: {err}. Try again --\n')
                     elif choice1 == 3 and choice2 == 1:
-                        print('BALANCE:',
-                              bankUser.getBalance(AccountType.CHECKING))
+                        try:
+                            balance = bankUser.getBalance(AccountType.CHECKING)
+                            print(f'\nBALANCE: {balance}\n')
+                        except Exception as err:
+                            print(f'\nERROR: {err}. Try again --\n')
                     elif choice1 == 3 and choice2 == 2:
-                        print('BALANCE:',
-                              bankUser.getBalance(AccountType.SAVINGS))
+                        try:
+                            balance = bankUser.getBalance(AccountType.SAVINGS)
+                            print(f'\nBALANCE: {balance}\n')
+                        except Exception as err:
+                            print(f'\nERROR: {err}. Try again --\n')
                     elif 4 <= choice1 <= 5:
                         print(f'Enter Integer Amount, Cannot Be Negative:')
                         amount = input()
                         if not amount.isnumeric():
-                            print('-- Invalid Amount; Try Again --')
+                            print('\nERROR: Invalid Amount. Try Again --\n')
                             continue
                         amount = int(amount)
                         if choice1 == 4 and choice2 == 1:
-                            bankUser.deposit(AccountType.CHECKING, amount)
+                            try:
+                                bankUser.deposit(AccountType.CHECKING, amount)
+                                print(f'\nDEPOSITED {amount}\n')
+                            except Exception as err:
+                                print(f'\nERROR: {err}. Try again --\n')
                         elif choice1 == 4 and choice2 == 2:
-                            bankUser.deposit(AccountType.SAVINGS, amount)
+                            try:
+                                bankUser.deposit(AccountType.SAVINGS, amount)
+                                print(f'\nDEPOSITED {amount}\n')
+                            except Exception as err:
+                                print(f'\nERROR: {err}. Try again --\n')
                         elif choice1 == 5 and choice2 == 1:
-                            bankUser.withdraw(AccountType.CHECKING, amount)
+                            try:
+                                bankUser.withdraw(AccountType.CHECKING, amount)
+                                print(f'\nWITHDREW {amount}\n')
+                            except Exception as err:
+                                print(f'\nERROR: {err}. Try again --\n')
                         elif choice1 == 5 and choice2 == 2:
-                            bankUser.withdraw(AccountType.SAVINGS, amount)
+                            try:
+                                bankUser.withdraw(AccountType.SAVINGS, amount)
+                                print(f'\nWITHDREW {amount}\n')
+                            except Exception as err:
+                                print(f'\nERROR: {err}. Try again --\n')
                 else:
-                    print('-- Invalid Choice; Try Again --')
+                    print('\nERROR: Invalid Choice. Try Again --\n')
             else:
-                print('-- Invalid Choice; Try Again --')
+                print('\nERROR: Invalid Choice. Try Again --\n')
     return Interface
-
-# TODO: Could try < > brackets around 'Invalid Choice'
 
 
 # TODO: Demoing...

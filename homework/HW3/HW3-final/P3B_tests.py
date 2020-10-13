@@ -11,7 +11,7 @@ def test_over_withdrawal():
     try:
         user.withdraw(bank.AccountType.SAVINGS, 1000)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
 
 
 # Test if withdrawing and depositing a negative amount
@@ -22,11 +22,11 @@ def test_negative_amount():
     try:
         user.withdraw(bank.AccountType.SAVINGS, -10)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
     try:
         user.deposit(bank.AccountType.SAVINGS, -10)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
 
 
 # Test if duplicate attempts to create a savings and checking account
@@ -37,11 +37,11 @@ def test_duplicate_accounts():
     try:
         user.addAccount(bank.AccountType.SAVINGS)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
     try:
         user.addAccount(bank.AccountType.CHECKING)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
     # Should still able to access already existing accounts (with no error) --
     user.deposit(bank.AccountType.SAVINGS, 10)
     user.deposit(bank.AccountType.CHECKING, 10)
@@ -53,21 +53,26 @@ def test_account_exists():
     try:
         user.getBalance(bank.AccountType.SAVINGS)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
     try:
         user.deposit(bank.AccountType.CHECKING, 10)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
     try:
         user.withdraw(bank.AccountType.CHECKING, 10)
     except Exception as e:
-        print('Error:', e)
+        print('ERROR:', e)
 
 
-# Call all tests
+# Call tests
+print('Error exception tests -- \n')
+print('Calling test_over_withdrawal()...')
 test_over_withdrawal()
+print('\nCalling test_negative_amount()...')
 test_negative_amount()
+print('\nCalling test_duplicate_accounts()...')
 test_duplicate_accounts()
+print('\nCalling test_account_exists()...')
 test_account_exists()
 
 
@@ -75,12 +80,14 @@ test_account_exists()
 # TODO: but I think just for the BankUser class (could call BankAccount methods from user).\
 # TODO: Maybe also use self.assertTrue stuff (https://stackoverflow.com/questions/4541155/check-if-a-number-is-int-or-float)
 
-print()
+print('\nAdditional tests -- \n')
 
 # -- BankAccount() --
 
-# Check that __str__ works
 a = bank.BankAccount("Joe", bank.AccountType.CHECKING)
+print(f'Created \'a\' via BankAccount(\'Joe\', bank.AccountType.CHECKING)')
+
+# Check that __str__ works
 print(a)
 
 # Check that __len__ works
