@@ -18,7 +18,6 @@ def test_over_withdrawal():
 def test_negative_amount():
     user = bank.BankUser('Joe')
     user.addAccount(bank.AccountType.SAVINGS)
-    user.deposit(bank.AccountType.SAVINGS, 10)
     try:
         user.withdraw(bank.AccountType.SAVINGS, -10)
     except Exception as e:
