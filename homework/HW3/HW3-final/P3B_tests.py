@@ -64,57 +64,57 @@ def test_account_exists():
         print(e)
 
 
-# Call exception error test functions
+# Call exception error test functions above
 print('EXCEPTION ERROR TESTS -- \n')
 print('- Calling test_over_withdrawal() returns...')
 test_over_withdrawal()
-print('- Calling test_negative_amount() returns...')
+print('\n- Calling test_negative_amount() returns...')
 test_negative_amount()
-print('- Calling test_duplicate_accounts() returns...')
+print('\n- Calling test_duplicate_accounts() returns...')
 test_duplicate_accounts()
-print('- Calling test_account_exists() returns...')
+print('\n- Calling test_account_exists() returns...')
 test_account_exists()
 
 # Additional tests
 print('\nADDITIONAL TESTS -- \n')
 # BankAccount class
-print('BankAccount class:')
+print('BankAccount class:\n')
 account = bank.BankAccount('Joe', bank.AccountType.CHECKING)
 print(f'- Created \'account\' via calling BankAccount(\'Joe\', '
       f'bank.AccountType.CHECKING)')
-print(f'- Calling print(account) returns...')
+print(f'\n- Calling print(account) returns...')
 print(account)              # Check that __str__ works
 # BankUser class
-print('\nBankUser class:')
+print('\nBankUser class:\n')
 user = bank.BankUser('Joe')
 print('- Created \'user\' via calling BankUser(\'Joe\')')
-print('- Calling print(user) returns...')
+print('\n- Calling print(user) returns...')
 print(user)                 # Check that __str__ works (should show no accounts)
 user.addAccount(bank.AccountType.SAVINGS)
-print('- Added SAVINGS account')
+print('\n- Added SAVINGS account')
 user.addAccount(bank.AccountType.CHECKING)
-print('- Added CHECKING account')
-print('- Calling print(user) returns...')
+print('\n- Added CHECKING account')
+print('\n- Calling print(user) returns...')
 print(user)                 # Should show SAVINGS and CHECKING accounts
-print(f'- SAVINGS balance is: '
+print(f'\n- SAVINGS balance is: '
       f'{user.getBalance(bank.AccountType.SAVINGS)}')   # Should show 0
-print(f'- CHECKING balance is: '
+print(f'\n- CHECKING balance is: '
       f'{user.getBalance(bank.AccountType.CHECKING)}')  # Should show 0
 user.deposit(bank.AccountType.SAVINGS, 10)
-print(f'- Deposited 10 into SAVINGS')
+print(f'\n- Deposited 10 into SAVINGS')
 user.deposit(bank.AccountType.CHECKING, 10)
-print(f'- Deposited 10 into CHECKING')
-print(f'- SAVINGS balance is: '
+print(f'\n- Deposited 10 into CHECKING')
+print(f'\n- SAVINGS balance is: '
       f'{user.getBalance(bank.AccountType.SAVINGS)}')   # Should show 10
-print(f'- CHECKING balance is: '
+print(f'\n- CHECKING balance is: '
       f'{user.getBalance(bank.AccountType.CHECKING)}')  # Should show 10
 user.withdraw(bank.AccountType.SAVINGS, 4)
-print('- Withdrew 4 from SAVINGS')
+print('\n- Withdrew 4 from SAVINGS')
 user.withdraw(bank.AccountType.CHECKING, 4)
-print('- Withdrew 4 from CHECKING')
-print(f'- SAVINGS balance is: '
+print('\n- Withdrew 4 from CHECKING')
+print(f'\n- SAVINGS balance is: '
       f'{user.getBalance(bank.AccountType.SAVINGS)}')   # Should show 6
-print(f'- CHECKING balance is: '
+print(f'\n- CHECKING balance is: '
       f'{user.getBalance(bank.AccountType.CHECKING)}')  # Should show 6
 
 # TODO: Fix commenting to make sense, wherever

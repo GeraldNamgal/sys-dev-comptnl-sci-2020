@@ -28,7 +28,8 @@ for idx, model in enumerate(models):
         model_idx = idx
 if high_score > 0:                         # If highest score is > 0
     high_scorer = models[model_idx]
-    print(f'The parameters for the best model ({type(high_scorer).__name__}) are:')
+    print(f'\nThe parameters for the best model '
+          f'({type(high_scorer).__name__}) are:')
     for key, val in high_scorer.get_params().items():
         print(f"'{key}' = {val}")
 
