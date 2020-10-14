@@ -115,5 +115,3 @@ print(f'\n- SAVINGS balance is: '
       f'{user.getBalance(bank.AccountType.SAVINGS)}')   # Should show 6
 print(f'\n- CHECKING balance is: '
       f'{user.getBalance(bank.AccountType.CHECKING)}')  # Should show 6
-
-# TODO: Fix commenting to make sense, wherever
