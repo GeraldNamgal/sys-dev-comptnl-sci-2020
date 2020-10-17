@@ -11,7 +11,7 @@ def numerical_diff(f, h):
     return approx_derivative
 
 
-# TODO: Need? -- Function of interest
+# Given function
 def f(x):
     return np.log(x)
 
@@ -32,9 +32,9 @@ fd_h2 = numerical_diff(f, h2)
 fd_h3 = numerical_diff(f, h3)
 
 # TODO
-# Arbitrary x values of interest where 0.2 <= x <= 0.4
-#x_values = [0.2, 0.225, 0.25, 0.275, 0.3, 0.325, 0.35, 0.375, 0.4]
-x_values = np.linspace(0.2, 0.4, 100)
+# Arbitrary x values, defined domain: 0.2 <= x <= 0.4
+#x_values = np.linspace(0.2, 0.20025, 50)
+x_values = np.linspace(0.2, 0.4, 50)
 
 # Initialize lists for f prime values
 true_prime_vals = []
@@ -50,16 +50,17 @@ for x in x_values:
     fd_h3_values.append(fd_h3(x))
 
 # TODO: Plot the lines
-plt.plot(x_values, true_prime_vals, linestyle=':', label='true derivative')
-plt.plot(x_values, fd_h1_values, label='h1')
-plt.plot(x_values, fd_h2_values, linestyle='-', label='h2')
-plt.plot(x_values, fd_h3_values, label='h3')
-plt.title('TODO')
-plt.xlabel('TODO')
-plt.ylabel('f prime')
+plt.plot(x_values, true_prime_vals, linestyle=':', label='f\'(x) (exact)')
+plt.plot(x_values, fd_h1_values, label='f\'(x) (h = 1e-1)')
+plt.plot(x_values, fd_h2_values, linestyle='-', label='f\'(x) (h = 1e-7)')
+plt.plot(x_values, fd_h3_values, label='f\'(x) (h = 1e-15)')
+plt.title('Derivative of \'f(x) = ln(x)\' Vs. \'x\' for Various \'h\' (Delta x)')
+plt.xlabel('x')
+plt.ylabel('f \'(x)')
 plt.legend()
 plt.show()
 
 
 # References:
 # - https://youtu.be/Qm1TDobNrns
+# - https://matplotlib.org/gallery/lines_bars_and_markers/line_styles_reference.html
