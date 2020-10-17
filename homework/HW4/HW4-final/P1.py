@@ -33,7 +33,7 @@ fd_h3 = numerical_diff(f, h3)
 
 # TODO
 # Arbitrary x values, defined domain: 0.2 <= x <= 0.4
-#x_values = np.linspace(0.2, 0.20025, 50)
+# Shows the graph more spaced out -- x_values = np.linspace(0.2, 0.20025, 50)
 x_values = np.linspace(0.2, 0.4, 50)
 
 # Initialize lists for f prime values
@@ -59,6 +59,8 @@ plt.xlabel('x')
 plt.ylabel('f \'(x)')
 plt.legend()
 plt.show()
+
+# TODO: For Problem 1C, watch Lecture 10 for his explanation of floating point errors, etc.
 
 
 # References:
