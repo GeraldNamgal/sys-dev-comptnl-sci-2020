@@ -31,9 +31,8 @@ fd_h1 = numerical_diff(f, h1)
 fd_h2 = numerical_diff(f, h2)
 fd_h3 = numerical_diff(f, h3)
 
-# TODO
+# TODO: Maybe check Piazza / office hours if graph is ok?
 # Arbitrary x values, defined domain: 0.2 <= x <= 0.4
-# Shows the graph more spaced out -- x_values = np.linspace(0.2, 0.20025, 50)
 x_values = np.linspace(0.2, 0.4, 50)
 
 # Initialize lists for f prime values
@@ -49,7 +48,7 @@ for x in x_values:
     fd_h2_values.append(fd_h2(x))
     fd_h3_values.append(fd_h3(x))
 
-# TODO: Plot the lines
+# TODO: Titles/labels need work? -- Plot the lines
 plt.plot(x_values, true_prime_vals, linestyle=':', label='f\'(x) (exact)')
 plt.plot(x_values, fd_h1_values, label='f\'(x) (h = 1e-1)')
 plt.plot(x_values, fd_h2_values, linestyle='-', label='f\'(x) (h = 1e-7)')
