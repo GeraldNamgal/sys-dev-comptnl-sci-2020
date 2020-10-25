@@ -11,8 +11,7 @@ class AutoDiffToy:
         except AttributeError:
             try:
                 new_obj = AutoDiffToy(self.val * other)
-                if new_obj.der is None:
-                    new_obj.der = other
+                new_obj.der = other
                 return new_obj
             except Exception as err:
                 print(f'Got an error: \'{err}\'')
