@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
 
 class AutoDiffToy:
-    def __init__(self, eval_point):
-        self.val = eval_point               # Set function value
-        self.der = None                     # Initialize derivative value
+    def __init__(self, eval_point, der_value=1.0):
+        self.val = eval_point              # Set function value
+        self.der = der_value               # Set derivative value
 
-    def __mul__(self, other):
+    def __mul__(self, other):              # Note: Applies product rule
         try:
-            return AutoDiffToy(self.val * other.val)
+            return AutoDiffToy(self.val * other.val,
+                               self.der * other.val + self.val * other.der)
         except AttributeError:
-            try:
-                new_obj = AutoDiffToy(self.val * other)
-                new_obj.der = other
-                return new_obj
+            try:                           # other is scalar (has 0 derivative)?
+                return AutoDiffToy(self.val * other, self.der * other)
             except Exception as err:
                 print(f'Got an error: \'{err}\'')
 
     def __rmul__(self, other):
         return self.__mul__(other)
 
-    def __add__(self, other):
+    def __add__(self, other):              # Note: Applies sum rule
         try:
-            return AutoDiffToy(self.val + other.val)
+            return AutoDiffToy(self.val + other.val, self.der + other.der)
         except AttributeError:
-            try:
-                new_obj = AutoDiffToy(self.val + other)
-                new_obj.der = self.der      # Pass derivative to new object
-                return new_obj
+            try:                           # other is scalar (has 0 derivative)?
+                return AutoDiffToy(self.val + other, self.der)
             except Exception as err:
                 print(f'Got an error: \'{err}\'')
 
@@ -35,10 +32,10 @@ class AutoDiffToy:
 
 
 # Demoing AutoDiffToy...
-a = 2.0                                     # Value to evaluate at
+a = 2.0                                    # Value to evaluate at
 x = AutoDiffToy(a)
-alpha = 2.0
-beta = 3.0
+alpha = 2.0                                # Slope
+beta = 3.0                                 # Y-intercept
 
 f = alpha * x + beta
 print(f.val, f.der)
