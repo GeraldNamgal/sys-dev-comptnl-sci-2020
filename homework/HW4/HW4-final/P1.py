@@ -47,7 +47,6 @@ for x in x_values:
     fd_h2_values.append(fd_h2(x))
     fd_h3_values.append(fd_h3(x))
 
-# TODO: Plot ok? -- Create the plot
 plt.plot(x_values, true_prime_vals, linestyle=':', label='f\'(x) exactly')
 plt.plot(x_values, fd_h1_values, label='f\'(x) for h = 1e-1')
 plt.plot(x_values, fd_h2_values, linestyle='-', label='f\'(x) for h = 1e-7')
