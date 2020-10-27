@@ -31,7 +31,6 @@ fd_h1 = numerical_diff(f, h1)
 fd_h2 = numerical_diff(f, h2)
 fd_h3 = numerical_diff(f, h3)
 
-# TODO: Maybe check Piazza / office hours if graph is ok?
 # Arbitrary x values for defined domain: 0.2 <= x <= 0.4
 x_values = np.linspace(0.2, 0.4, 50)
 
@@ -75,7 +74,8 @@ print('\nAnswer to Q-b: Automatic differentiation addresses these problems by '
       'the fact that it doesn\'t use finite difference allowing it to be both '
       'accurate to machine precision and stable. It further achieves these '
       'qualities through the use of embedded symbolic derivatives and '
-      'elementary functions when differentiating.')
+      'elementary functions when differentiating in either forward or reverse '
+      'mode.')
 
 # Show the plot
 plt.show()
