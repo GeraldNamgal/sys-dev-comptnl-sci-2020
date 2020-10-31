@@ -28,13 +28,13 @@ class LinkedList:
         return self._head if i == 0 else self._tail[i-1]
 
     def prepend(self, val):
-        pass # TODO
+        pass  # TODO
 
     def append(self, val):
-        pass # TODO
+        pass  # TODO
 
     def for_each(self, fun):
-        pass # TODO
+        pass  # TODO
 
     def summation(self):
         return self._head + self._tail.summation() if self._tail else self._head
@@ -45,7 +45,8 @@ class LinkedList:
         return smaller(self._head, self._tail.minimum()) if self._tail else self._head
 
     def reduce_right(self, fun):
-        pass # TODO
+        pass  # TODO
+
 
 class Nil():
 
@@ -65,10 +66,13 @@ class Nil():
         return False
 
     def prepend(self, val):
-        pass # TODO
+        pass  # TODO
 
     def append(self, val):
         return LinkedList(val, Nil())
 
     def for_each(self, fun):
-        pass # TODO
+        pass  # TODO
+
+
+# TODO: Debugging
