@@ -41,7 +41,8 @@ class LinkedList:
         if self._tail:
             return LinkedList(fun(self._head), self._tail.for_each(fun))
         else:
-            return LinkedList(fun(self._head), Nil())
+            # TODO: How do we handle Nil() exactly?
+            return LinkedList(fun(self._head), Nil().for_each(fun))
 
     def summation(self):
         return self._head + self._tail.summation() if self._tail else self._head
@@ -79,11 +80,13 @@ class Nil():
     def prepend(self, val):
         return LinkedList(val, Nil())
 
+    # TODO: Is append the same as prepend?
     def append(self, val):
         return LinkedList(val, Nil())
 
+    # TODO: What exactly is this supposed to do?
     def for_each(self, fun):
-        pass  # TODO
+        return Nil()
 
 
 # TODO: Debugging...
