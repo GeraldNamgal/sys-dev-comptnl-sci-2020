@@ -37,7 +37,10 @@ class LinkedList:
             return LinkedList(self._head, LinkedList(val, Nil()))
 
     def for_each(self, fun):
-        pass  # TODO
+        if self._tail:
+            return LinkedList(fun(self._head), self._tail.for_each(fun))
+        else:
+            return LinkedList(fun(self._head), Nil())
 
     def summation(self):
         return self._head + self._tail.summation() if self._tail else self._head
@@ -48,7 +51,10 @@ class LinkedList:
         return smaller(self._head, self._tail.minimum()) if self._tail else self._head
 
     def reduce_right(self, fun):
-        pass  # TODO
+        if self._tail:
+            return fun(self._head, self._tail.reduce_right(fun))
+        else:
+            return self._head
 
 
 class Nil():
@@ -68,7 +74,7 @@ class Nil():
     def __bool__(self):
         return False
 
-    # TODO: Is prepend the same as append
+    # TODO: Is prepend the same as append?
     def prepend(self, val):
         return LinkedList(val, Nil())
 
@@ -81,27 +87,33 @@ class Nil():
 
 # TODO: Debugging...
 # Create a linked list
-null_node = Nil()
-llist = null_node.append(6)
+llist = Nil().append(6)
 
 # # APPEND demo
 # llist = llist.append(7)
 # llist = llist.append(8)
-# # Print out elements
-# while True:
-#     print(llist.head)
-#     if llist.tail:
-#         llist = llist.tail
-#     else:
-#         break
-
+# # Print elements
+# print(llist)
+#
 # # PREPEND demo
 # llist = llist.prepend(7)
 # llist = llist.prepend(8)
-# # Print out elements
-# while True:
-#     print(llist.head)
-#     if llist.tail:
-#         llist = llist.tail
-#     else:
-#         break
+# # Print elements
+# print(llist)
+#
+# # PART B demo + append demo
+# l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
+# def square(x):
+#     return x**2
+# print(l)
+# print(l.for_each(square))
+# l = Nil().append(1).append(2).append(3).append(4)
+# print(l)
+# print(l.for_each(square))
+#
+# # PART C demo
+# l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
+# def smaller(a, b): # our "combine" function
+#     return a if a < b else b
+# print(l)
+# print(l.reduce_right(smaller))
