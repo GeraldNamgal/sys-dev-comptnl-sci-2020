@@ -36,6 +36,7 @@ class LinkedList:
         else:                         # Base case (tail is a Nil)
             return LinkedList(self._head, LinkedList(val, Nil()))
 
+    # TODO: When do we return Nil (HW instructions Part B)? And does this apply to Part C?
     def for_each(self, fun):
         if self._tail:
             return LinkedList(fun(self._head), self._tail.for_each(fun))
