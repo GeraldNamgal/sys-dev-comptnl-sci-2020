@@ -28,10 +28,13 @@ class LinkedList:
         return self._head if i == 0 else self._tail[i-1]
 
     def prepend(self, val):
-        pass  # TODO
+        return LinkedList(val, self)
 
     def append(self, val):
-        pass  # TODO
+        if self._tail:                # Recurse (tail is a LinkedList)
+            return LinkedList(self._head, self._tail.append(val))
+        else:                         # Base case (tail is a Nil)
+            return LinkedList(self._head, LinkedList(val, Nil()))
 
     def for_each(self, fun):
         pass  # TODO
@@ -65,8 +68,9 @@ class Nil():
     def __bool__(self):
         return False
 
+    # TODO: Is prepend the same as append
     def prepend(self, val):
-        pass  # TODO
+        return LinkedList(val, Nil())
 
     def append(self, val):
         return LinkedList(val, Nil())
@@ -75,4 +79,29 @@ class Nil():
         pass  # TODO
 
 
-# TODO: Debugging
+# TODO: Debugging...
+# Create a linked list
+null_node = Nil()
+llist = null_node.append(6)
+
+# # APPEND demo
+# llist = llist.append(7)
+# llist = llist.append(8)
+# # Print out elements
+# while True:
+#     print(llist.head)
+#     if llist.tail:
+#         llist = llist.tail
+#     else:
+#         break
+
+# # PREPEND demo
+# llist = llist.prepend(7)
+# llist = llist.prepend(8)
+# # Print out elements
+# while True:
+#     print(llist.head)
+#     if llist.tail:
+#         llist = llist.tail
+#     else:
+#         break
