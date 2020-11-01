@@ -23,12 +23,15 @@ def longest_sentence():
     list_of_sentences = get_list_of_sentences()
     # TODO: Debugging (remove later)
     #print(list_of_sentences)
-    def count_words(x):
-        return len(x.split())
-    def larger(a, b):
+
+    def word_count(sentence):
+        return len(sentence.split())
+
+    def higher(a, b):
         return a if a > b else b
-    return list_of_sentences.for_each(count_words).reduce_right(larger)
+
+    return list_of_sentences.for_each(word_count).reduce_right(higher)
 
 
-# TODO: Debugging...
+# TODO: Debugging (erase later, i.e, no demo needed?)
 print(longest_sentence())
