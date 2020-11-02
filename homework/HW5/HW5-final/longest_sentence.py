@@ -3,6 +3,7 @@
 import linked_list
 
 
+# TODO: Do we need the actual swansway txt file?
 def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
     def to_sentences(p):
         for delimiter in '.?!': p = p.replace(delimiter, '|')
