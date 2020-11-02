@@ -30,11 +30,37 @@ class BSTTable:
         return self._get(self._root, key)
 
     def _put(self, node, key, val):
-        pass  # TODO
+        if node is None:
+            return BSTNode(key, val)
+        if key < node.key:
+            node.left = self._put(node.left, key, val)
+        else:
+            node.right = self._put(node.right, key, val)
+        node.size += 1
+        return node
 
+    # TODO
     def _get(self, node, key):
-        pass  # TODO
+        if node is None:
+            raise KeyError
+        if key == node.key:
+            return node.val
+        if key < node.key:
+            return self._get(node.left, key)
+        else:
+            return self._get(node.right, key)
+
+        # TODO: Check that updating size of nodes correctly (anything else?)
 
     @staticmethod
     def _size(node):
         return node.size if node else 0
+
+
+# TODO: Debugging...
+greektoroman = BSTTable()
+greektoroman.put('Athena',    'Minerva')
+greektoroman.put('Eros',      'Cupid')
+greektoroman.put('Aphrodite', 'Venus')
+print(greektoroman.get('Eros'))
+print(greektoroman)
