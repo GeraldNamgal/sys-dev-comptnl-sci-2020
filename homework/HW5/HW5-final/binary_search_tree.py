@@ -39,7 +39,6 @@ class BSTTable:
         node.size += 1
         return node
 
-    # TODO
     def _get(self, node, key):
         if node is None:
             raise KeyError
@@ -50,8 +49,6 @@ class BSTTable:
         else:
             return self._get(node.right, key)
 
-        # TODO: Check that updating size of nodes correctly (anything else?)
-
     @staticmethod
     def _size(node):
         return node.size if node else 0
@@ -59,8 +56,20 @@ class BSTTable:
 
 # TODO: Debugging...
 greektoroman = BSTTable()
-greektoroman.put('Athena',    'Minerva')
-greektoroman.put('Eros',      'Cupid')
-greektoroman.put('Aphrodite', 'Venus')
-print(greektoroman.get('Eros'))
+greektoroman.put(13, 'M')
+greektoroman.put(1, 'A')
+greektoroman.put(26, 'Z')
+greektoroman.put(2, 'B')
+greektoroman.put(25, 'Y')
+greektoroman.put(3, 'C')
+greektoroman.put(24, 'X')
+
+print(f'Getting 1: ')
+print(greektoroman.get(1))
+print(f'Getting 2: ')
+print(greektoroman.get(2))
+print(f'Getting 3: ')
+print(greektoroman.get(3))
+print(f'Getting 26: ')
+print(greektoroman.get(26))
 print(greektoroman)
