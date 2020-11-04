@@ -37,7 +37,8 @@ class BSTTable:
         else:
             node.right = self._put(node.right, key, val)
         node.size += 1
-        return node
+        # TODO: Wrong to return node? --
+        # return node
 
     def _get(self, node, key):
         if node is None:
@@ -54,22 +55,22 @@ class BSTTable:
         return node.size if node else 0
 
 
-# # TODO: Debugging... (erase / comment out later, i.e., no demo needed?)
-# greektoroman = BSTTable()
-# greektoroman.put(13, 'M')
-# greektoroman.put(1, 'A')
-# greektoroman.put(26, 'Z')
-# greektoroman.put(2, 'B')
-# greektoroman.put(25, 'Y')
-# greektoroman.put(3, 'C')
-# greektoroman.put(24, 'X')
-#
-# print(f'Getting 1: ')
-# print(greektoroman.get(1))
-# print(f'Getting 2: ')
-# print(greektoroman.get(2))
-# print(f'Getting 3: ')
-# print(greektoroman.get(3))
-# print(f'Getting 26: ')
-# print(greektoroman.get(26))
-# print(greektoroman)
+# TODO: Debugging... (erase / comment out later, i.e., no demo needed?)
+greektoroman = BSTTable()
+greektoroman.put(13, 'M')
+greektoroman.put(1, 'A')
+greektoroman.put(26, 'Z')
+greektoroman.put(2, 'B')
+greektoroman.put(25, 'Y')
+greektoroman.put(3, 'C')
+greektoroman.put(24, 'X')
+
+print(f'Getting 1: ')
+print(greektoroman.get(1))
+print(f'Getting 2: ')
+print(greektoroman.get(2))
+print(f'Getting 3: ')
+print(greektoroman.get(3))
+print(f'Getting 26: ')
+print(greektoroman.get(26))
+print(greektoroman)
