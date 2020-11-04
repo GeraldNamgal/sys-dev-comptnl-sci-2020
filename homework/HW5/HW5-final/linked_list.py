@@ -36,12 +36,12 @@ class LinkedList:
         else:                         # Base case (tail is a Nil)
             return LinkedList(self._head, LinkedList(val, Nil()))
 
-    # TODO: When do we return Nil (HW instructions Part B)? And does this apply to Part C?
+    # TODO: When do we return Nil (HW instructions Part B)? - Think in Nil()'s for_each?
     def for_each(self, fun):
         if self._tail:
             return LinkedList(fun(self._head), self._tail.for_each(fun))
         else:
-            # TODO: How do we handle Nil() exactly?
+            # TODO: How do we handle Nil() exactly? - Is this where we return it?
             return LinkedList(fun(self._head), Nil().for_each(fun))
 
     def summation(self):
@@ -76,20 +76,19 @@ class Nil():
     def __bool__(self):
         return False
 
-    # TODO: Is prepend the same as append?
+    # TODO: Is prepend the same as append (looks like it should be)?
     def prepend(self, val):
         return LinkedList(val, Nil())
 
-    # TODO: Is append the same as prepend?
     def append(self, val):
         return LinkedList(val, Nil())
 
-    # TODO: What exactly is this supposed to do?
+    # TODO: What exactly is this supposed to do (looks about right)?
     def for_each(self, fun):
         return Nil()
 
 
-# TODO: Debugging...
+# TODO: Debugging... (erase later / no demo?)
 # Create a linked list
 llist = Nil().append(6)
 
@@ -120,4 +119,9 @@ llist = Nil().append(6)
 # def smaller(a, b): # our "combine" function
 #     return a if a < b else b
 # print(l)
+# print(l.reduce_right(smaller))
+# def bigger(a, b): # our "combine" function
+#     return a if a > b else b
+# print(l.reduce_right(bigger))
+# l = Nil().prepend(12)                # One-element linked list
 # print(l.reduce_right(smaller))
