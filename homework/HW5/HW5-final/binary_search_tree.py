@@ -54,7 +54,7 @@ class BSTTable:
         return node.size if node else 0
 
 
-# # TODO: Debugging...
+# # TODO: Debugging... (erase / comment out later, i.e., no demo needed?)
 # greektoroman = BSTTable()
 # greektoroman.put(13, 'M')
 # greektoroman.put(1, 'A')

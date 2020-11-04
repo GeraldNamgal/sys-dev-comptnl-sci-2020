@@ -88,10 +88,10 @@ class Nil():
         return Nil()
 
 
-# TODO: Debugging... (erase later / no demo?)
-# Create a linked list
-llist = Nil().append(6)
-
+# TODO: Debugging... (erase / comment out later, i.e, no demo needed?)
+# # Create a linked list
+# llist = Nil().append(6)
+#
 # # APPEND demo
 # llist = llist.append(7)
 # llist = llist.append(8)

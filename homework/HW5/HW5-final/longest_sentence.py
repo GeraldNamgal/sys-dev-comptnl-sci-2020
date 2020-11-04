@@ -35,5 +35,5 @@ def longest_sentence():
     return list_of_sentences.for_each(word_count).reduce_right(higher)
 
 
-# TODO: Debugging (erase later, i.e, no demo needed?)
-print(longest_sentence())
+# TODO: Debugging (erase / comment out later, i.e, no demo needed?)
+# print(longest_sentence())
