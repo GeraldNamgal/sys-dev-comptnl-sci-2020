@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 
-import linked_list
+from linked_list import *
+# TODO: is modifying recursion limit ok (Piazza post said ok but for other question)?
+import sys
+sys.setrecursionlimit(2000)
 
 
-# TODO: Do we need the actual swansway txt file?
 def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
     def to_sentences(p):
         for delimiter in '.?!': p = p.replace(delimiter, '|')
@@ -12,8 +14,7 @@ def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
         paragraphs = f.readlines()
 
     sentences = [s for p in paragraphs for s in to_sentences(p) if len(s) > 1]
-    # TODO: Were you allowed to change Nil()?
-    list_of_sentences = linked_list.Nil()
+    list_of_sentences = Nil()
     for s in sentences[::-1]:
         list_of_sentences = list_of_sentences.prepend(s)
 
@@ -23,7 +24,7 @@ def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
 def longest_sentence():
     list_of_sentences = get_list_of_sentences()
     # TODO: Debugging (remove later)
-    #print(list_of_sentences)
+    # print(list_of_sentences)
 
     def word_count(sentence):
         return len(sentence.split())
