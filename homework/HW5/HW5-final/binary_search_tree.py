@@ -37,8 +37,7 @@ class BSTTable:
         else:
             node.right = self._put(node.right, key, val)
         node.size += 1
-        # TODO: Wrong to return node? --
-        # return node
+        return node
 
     def _get(self, node, key):
         if node is None:
@@ -56,21 +55,11 @@ class BSTTable:
 
 
 # TODO: Debugging... (erase / comment out later, i.e., no demo needed?)
-greektoroman = BSTTable()
-greektoroman.put(13, 'M')
-greektoroman.put(1, 'A')
-greektoroman.put(26, 'Z')
-greektoroman.put(2, 'B')
-greektoroman.put(25, 'Y')
-greektoroman.put(3, 'C')
-greektoroman.put(24, 'X')
-
-print(f'Getting 1: ')
-print(greektoroman.get(1))
-print(f'Getting 2: ')
-print(greektoroman.get(2))
-print(f'Getting 3: ')
-print(greektoroman.get(3))
-print(f'Getting 26: ')
-print(greektoroman.get(26))
-print(greektoroman)
+# tree = BSTTable()
+# list = [13,7,19,17,3,29,5,31,2,11]
+# list = [7,19,17,3,29,5,31,2,11]
+# list = [13,7,19,17,3,5,31,2,11]
+# list = [13,7,19,17,3,29,5,2,11]
+# for num in list:
+#     tree.put(num, num)
+# print(tree)
