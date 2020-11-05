@@ -21,6 +21,7 @@ class LinkedList:
     def __repr__(self):
         return f'LinkedList({repr(self._head)}, {repr(self._tail)})'
 
+    # TODO: Can check if this is working correctly per Piazza post (https://piazza.com/class/kc57xuuysdm64b?cid=388)
     def __len__(self):
         return 1 + len(self._tail)
 
