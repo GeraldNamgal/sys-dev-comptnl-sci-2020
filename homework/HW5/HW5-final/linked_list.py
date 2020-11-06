@@ -21,7 +21,6 @@ class LinkedList:
     def __repr__(self):
         return f'LinkedList({repr(self._head)}, {repr(self._tail)})'
 
-    # TODO: Can check if this is working correctly per Piazza post (https://piazza.com/class/kc57xuuysdm64b?cid=388)
     def __len__(self):
         return 1 + len(self._tail)
 
@@ -100,11 +99,13 @@ class Nil():
 #
 # # PART B demo + append demo
 # l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
+# print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
 # def square(x):
 #     return x**2
 # print(l)
 # print(l.for_each(square))
 # l = Nil().append(1).append(2).append(3).append(4)
+# print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
 # print(l)
 # print(l.for_each(square))
 #
