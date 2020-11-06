@@ -32,13 +32,19 @@ class BSTTable:
     def _put(self, node, key, val):
         if node is None:
             return BSTNode(key, val)
-        if key < node.key:
+        if node.key == key:
+            node.val = val
+        elif node.key > key:
+            if node.left is None:        # Adding a new node?
+                node.size += 1           # Increase node count
             node.left = self._put(node.left, key, val)
         else:
+            if node.right is None:       # Adding a new node?
+                node.size += 1           # Increase node count
             node.right = self._put(node.right, key, val)
-        node.size += 1
         return node
 
+    # TODO: Check that updating size of nodes is working right
     def _get(self, node, key):
         if node is None:
             raise KeyError
@@ -55,11 +61,23 @@ class BSTTable:
 
 
 # TODO: Debugging...
+greektoroman = BSTTable()
+greektoroman.put('Athena',    'Minerva')
+greektoroman.put('Eros',      'Cupid')
+greektoroman.put('Aphrodite', 'Venus')
+print(greektoroman.get('Eros'))
+print()
+print(greektoroman)
+# Test that value gets replaced (i.e., instead of added) --
+greektoroman.put('Aphrodite', 'Dumbledore')
+print()
+print(greektoroman)
+
 # tree = BSTTable()
 # list = [13,7,19,17,3,29,5,31,2,11]
-# list = [7,19,17,3,29,5,31,2,11]
-# list = [13,7,19,17,3,5,31,2,11]
-# list = [13,7,19,17,3,29,5,2,11]
+# # list = [7,19,17,3,29,5,31,2,11]
+# # list = [13,7,19,17,3,5,31,2,11]
+# # list = [13,7,19,17,3,29,5,2,11]
 # for num in list:
 #     tree.put(num, num)
 # print(tree)
