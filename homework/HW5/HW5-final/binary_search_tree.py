@@ -31,9 +31,9 @@ class BSTTable:
 
     def _put(self, node, key, val):
         try:
-            get_node(node, key).val = val           # Update node if exists
-        except Exception:
-            node = add_node(node, key, val)         # Else add it to tree
+            node = update_node(node, key, val)     # Update node if key exists
+        except KeyError:
+            node = add_node(node, key, val)        # Else add new node to tree
         return node
 
     # TODO: Check that updating size of nodes is working right
@@ -54,26 +54,28 @@ class BSTTable:
 
 
 # Utility function
-def get_node(node, key):
+def update_node(node, key, new_val):
     if node is None:
         raise KeyError
     if node.key == key:
+        node.val = new_val                         # Change node's value
         return node
     if node.key > key:
-        return get_node(node.left, key)
+        node.left = update_node(node.left, key, new_val)
     else:
-        return get_node(node.right, key)
+        node.right = update_node(node.right, key, new_val)
+    return node
 
 
 # Utility function
 def add_node(node, key, val):
     if node is None:
-        return BSTNode(key, val)  # Add new node
+        return BSTNode(key, val)                   # Add new node
     if node.key > key:
         node.left = add_node(node.left, key, val)
     if node.key < key:
         node.right = add_node(node.right, key, val)
-    node.size += 1
+    node.size += 1                                 # Update node size
     return node
 
 
@@ -82,13 +84,13 @@ def add_node(node, key, val):
 # greektoroman.put('Athena',    'Minerva')
 # greektoroman.put('Eros',      'Cupid')
 # greektoroman.put('Aphrodite', 'Venus')
-# print(greektoroman.get('Eros'))
+# print(greektoroman.get('Eros'))   # TODO: Should return Cupid
 # print()
 # print(greektoroman)
-# # Test that value gets replaced (i.e., instead of added) --
+# # TODO: Test that key value gets updated (i.e., instead of new node added) --
 # greektoroman.put('Aphrodite', 'Dumbledore')
 # print()
-# print(greektoroman.get('Eros'))   # Size should stay the same for just updates
+# print(greektoroman.get('Eros'))   # TODO: Size should stay the same for just updates
 # print()
 # print(greektoroman)
 
@@ -103,7 +105,8 @@ print(tree)
 tree.get(17)
 tree.put(29, 'update')
 print(tree)
-tree.get(17)                        # Size should stay the same for just updates
+tree.get(17)                      # Size should stay the same for just updates
 tree.put(70, 70)
 print(tree)
-tree.get(70)
+tree.get(70)                     # TODO: Size should change for new nodes
+tree.get(83)                     # TODO: Should throw KeyError if node isn't found
