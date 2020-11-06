@@ -30,24 +30,17 @@ class BSTTable:
         return self._get(self._root, key)
 
     def _put(self, node, key, val):
-        if node is None:
-            return BSTNode(key, val)
-        if node.key == key:
-            node.val = val
-        elif node.key > key:
-            if node.left is None:        # Adding a new node?
-                node.size += 1           # Increase node count
-            node.left = self._put(node.left, key, val)
-        else:
-            if node.right is None:       # Adding a new node?
-                node.size += 1           # Increase node count
-            node.right = self._put(node.right, key, val)
+        try:
+            get_node(node, key).val = val           # Update node if exists
+        except Exception:
+            node = add_node(node, key, val)         # Else add it to tree
         return node
 
     # TODO: Check that updating size of nodes is working right
     def _get(self, node, key):
         if node is None:
             raise KeyError
+        print(node.size)  # TODO: Remove this later
         if key == node.key:
             return node.val
         if key < node.key:
@@ -60,24 +53,57 @@ class BSTTable:
         return node.size if node else 0
 
 
-# TODO: Debugging...
-greektoroman = BSTTable()
-greektoroman.put('Athena',    'Minerva')
-greektoroman.put('Eros',      'Cupid')
-greektoroman.put('Aphrodite', 'Venus')
-print(greektoroman.get('Eros'))
-print()
-print(greektoroman)
-# Test that value gets replaced (i.e., instead of added) --
-greektoroman.put('Aphrodite', 'Dumbledore')
-print()
-print(greektoroman)
+# Utility function
+def get_node(node, key):
+    if node is None:
+        raise KeyError
+    if node.key == key:
+        return node
+    if node.key > key:
+        return get_node(node.left, key)
+    else:
+        return get_node(node.right, key)
 
-# tree = BSTTable()
-# list = [13,7,19,17,3,29,5,31,2,11]
-# # list = [7,19,17,3,29,5,31,2,11]
-# # list = [13,7,19,17,3,5,31,2,11]
-# # list = [13,7,19,17,3,29,5,2,11]
-# for num in list:
-#     tree.put(num, num)
-# print(tree)
+
+# Utility function
+def add_node(node, key, val):
+    if node is None:
+        return BSTNode(key, val)  # Add new node
+    if node.key > key:
+        node.left = add_node(node.left, key, val)
+    if node.key < key:
+        node.right = add_node(node.right, key, val)
+    node.size += 1
+    return node
+
+
+# TODO: Debugging...
+# greektoroman = BSTTable()
+# greektoroman.put('Athena',    'Minerva')
+# greektoroman.put('Eros',      'Cupid')
+# greektoroman.put('Aphrodite', 'Venus')
+# print(greektoroman.get('Eros'))
+# print()
+# print(greektoroman)
+# # Test that value gets replaced (i.e., instead of added) --
+# greektoroman.put('Aphrodite', 'Dumbledore')
+# print()
+# print(greektoroman.get('Eros'))   # Size should stay the same for just updates
+# print()
+# print(greektoroman)
+
+tree = BSTTable()
+list = [13,7,19,17,3,29,5,31,2,11]
+# list = [7,19,17,3,29,5,31,2,11]
+# list = [13,7,19,17,3,5,31,2,11]
+# list = [13,7,19,17,3,29,5,2,11]
+for num in list:
+    tree.put(num, num)
+print(tree)
+tree.get(17)
+tree.put(29, 'update')
+print(tree)
+tree.get(17)                        # Size should stay the same for just updates
+tree.put(70, 70)
+print(tree)
+tree.get(70)
