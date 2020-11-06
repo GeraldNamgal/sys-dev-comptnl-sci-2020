@@ -35,15 +35,10 @@ class LinkedList:
         if self._tail:                # Recurse (tail is a LinkedList)
             return LinkedList(self._head, self._tail.append(val))
         else:                         # Base case (tail is a Nil)
-            return LinkedList(self._head, LinkedList(val, Nil()))
+            return LinkedList(self._head, LinkedList(val, self._tail))
 
-    # TODO: When do we return Nil (HW instructions Part B)? - Think in Nil()'s for_each?
     def for_each(self, fun):
-        if self._tail:
-            return LinkedList(fun(self._head), self._tail.for_each(fun))
-        else:
-            # TODO: How do we handle Nil() exactly? - Is this where we return it?
-            return LinkedList(fun(self._head), Nil().for_each(fun))
+        return LinkedList(fun(self._head), self._tail.for_each(fun))
 
     def summation(self):
         return self._head + self._tail.summation() if self._tail else self._head
@@ -77,19 +72,17 @@ class Nil():
     def __bool__(self):
         return False
 
-    # TODO: Is prepend the same as append (looks like it should be)?
     def prepend(self, val):
-        return LinkedList(val, Nil())
+        return LinkedList(val, self)
 
     def append(self, val):
         return LinkedList(val, Nil())
 
-    # TODO: What exactly is this supposed to do (looks about right)?
     def for_each(self, fun):
-        return Nil()
+        return self
 
 
-# TODO: Debugging... (erase / comment out later, i.e, no demo needed?)
+# TODO: Debugging...
 # # Create a linked list
 # llist = Nil().append(6)
 #

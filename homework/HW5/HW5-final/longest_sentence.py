@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 from linked_list import *
-# TODO: is modifying recursion limit ok (Piazza post said ok but for other question)?
 import sys
 sys.setrecursionlimit(2000)
 
@@ -23,7 +22,7 @@ def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
 
 def longest_sentence():
     list_of_sentences = get_list_of_sentences()
-    # TODO: Debugging (remove later)
+    # TODO: Debugging
     # print(list_of_sentences)
 
     def word_count(sentence):
@@ -35,5 +34,5 @@ def longest_sentence():
     return list_of_sentences.for_each(word_count).reduce_right(higher)
 
 
-# TODO: Debugging (erase / comment out later, i.e, no demo needed?)
+# TODO: Debugging...
 # print(longest_sentence())

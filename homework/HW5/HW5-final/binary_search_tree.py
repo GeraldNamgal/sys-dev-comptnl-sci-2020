@@ -54,7 +54,7 @@ class BSTTable:
         return node.size if node else 0
 
 
-# TODO: Debugging... (erase / comment out later, i.e., no demo needed?)
+# TODO: Debugging...
 # tree = BSTTable()
 # list = [13,7,19,17,3,29,5,31,2,11]
 # list = [7,19,17,3,29,5,31,2,11]
