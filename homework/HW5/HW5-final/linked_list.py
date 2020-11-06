@@ -24,6 +24,7 @@ class LinkedList:
     def __len__(self):
         return 1 + len(self._tail)
 
+    # TODO: Could test this
     def __getitem__(self, i):
         return self._head if i == 0 else self._tail[i-1]
 
