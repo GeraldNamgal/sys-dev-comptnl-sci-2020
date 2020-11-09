@@ -82,21 +82,21 @@ class Nil():
 
 
 # TODO: Debugging...
-# Create a linked list
-llist = Nil().append(6)
-
-# APPEND demo
-llist = llist.append(7)
-llist = llist.append(8)
-# Print elements
-print(llist)
-
-# PREPEND demo
-llist = llist.prepend(7)
-llist = llist.prepend(8)
-# Print elements
-print(llist)
-
+# # Create a linked list
+# llist = Nil().append(6)
+#
+# # APPEND demo
+# llist = llist.append(7)
+# llist = llist.append(8)
+# # Print elements
+# print(llist)
+#
+# # PREPEND demo
+# llist = llist.prepend(7)
+# llist = llist.prepend(8)
+# # Print elements
+# print(llist)
+#
 # PART B demo + append demo
 # l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
 # print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
