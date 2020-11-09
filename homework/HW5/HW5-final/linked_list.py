@@ -24,7 +24,6 @@ class LinkedList:
     def __len__(self):
         return 1 + len(self._tail)
 
-    # TODO: Could test this
     def __getitem__(self, i):
         return self._head if i == 0 else self._tail[i-1]
 
@@ -83,22 +82,22 @@ class Nil():
 
 
 # TODO: Debugging...
-# # Create a linked list
-# llist = Nil().append(6)
-#
-# # APPEND demo
-# llist = llist.append(7)
-# llist = llist.append(8)
-# # Print elements
-# print(llist)
-#
-# # PREPEND demo
-# llist = llist.prepend(7)
-# llist = llist.prepend(8)
-# # Print elements
-# print(llist)
-#
-# # PART B demo + append demo
+# Create a linked list
+llist = Nil().append(6)
+
+# APPEND demo
+llist = llist.append(7)
+llist = llist.append(8)
+# Print elements
+print(llist)
+
+# PREPEND demo
+llist = llist.prepend(7)
+llist = llist.prepend(8)
+# Print elements
+print(llist)
+
+# PART B demo + append demo
 # l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
 # print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
 # def square(x):
@@ -119,5 +118,9 @@ class Nil():
 # def bigger(a, b): # our "combine" function
 #     return a if a > b else b
 # print(l.reduce_right(bigger))
-# l = Nil().prepend(12)                # One-element linked list
-# print(l.reduce_right(smaller))
+#
+# # Testing getitem
+# print(l[1])                      # Should be 3
+#
+# l = Nil().prepend(12)            # One-element linked list
+# print(l.reduce_right(smaller))   # Should be 12
