@@ -50,7 +50,7 @@ class BSTTable:
     def _get(self, node, key):
         if node is None:
             raise KeyError
-        print(node.size)               # TODO: Debugging -- Check that updating size of nodes is working right (comment this later)
+        # print(node.size)               # TODO: Debugging -- Comment this later
         if key == node.key:
             return node.val
         if key < node.key:
