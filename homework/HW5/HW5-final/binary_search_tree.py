@@ -16,7 +16,7 @@ class BSTNode:
 class BSTTable:
     def __init__(self):
         self._root = None
-        self.added_node = False          # TODO: Test the new boolean way
+        self.added_node = False
 
     def __str__(self):
         return str(self._root)
@@ -47,11 +47,10 @@ class BSTTable:
             node.size += 1
         return node
 
-    # TODO: Check that updating size of nodes is working right
     def _get(self, node, key):
         if node is None:
             raise KeyError
-        print(node.size)  # TODO: Remove this later
+        print(node.size)               # TODO: Debugging -- Check that updating size of nodes is working right (comment this later)
         if key == node.key:
             return node.val
         if key < node.key:
@@ -64,21 +63,20 @@ class BSTTable:
         return node.size if node else 0
 
 
-# TODO: Debugging...
+# Debugging...
 # greektoroman = BSTTable()
 # greektoroman.put('Athena',    'Minerva')
 # greektoroman.put('Eros',      'Cupid')
 # greektoroman.put('Aphrodite', 'Venus')
-# print(greektoroman.get('Eros'))   # TODO: Should return Cupid
+# print(greektoroman.get('Eros'))   # Size should be 3,1 and should return Cupid
 # print()
 # print(greektoroman)
-# # TODO: Test that key value gets updated (i.e., instead of new node added) --
-# greektoroman.put('Aphrodite', 'Dumbledore')
+# greektoroman.put('Aphrodite', 'Dumbledore')          # Should update Aphrodite
 # print()
-# print(greektoroman.get('Eros'))   # TODO: Size should stay the same for just updates
+# print(greektoroman.get('Eros'))   # Size should stay the same for just updates
 # print()
-# print(greektoroman)
-
+# print(greektoroman)          # Only value should be update (no new node added)
+#
 # tree = BSTTable()
 # list = [13,7,19,17,3,29,5,31,2,11]
 # # list = [7,19,17,3,29,5,31,2,11]
@@ -87,11 +85,11 @@ class BSTTable:
 # for num in list:
 #     tree.put(num, num)
 # print(tree)
-# tree.get(17)
-# tree.put(29, 'update')
+# tree.get(17)                                       # Size should be 10, 4, ...
+# tree.put(29, 'update')                       # Should update 29 (not new node)
 # print(tree)
 # tree.get(17)                      # Size should stay the same for just updates
 # tree.put(70, 70)
 # print(tree)
-# tree.get(70)                     # TODO: Size should change for new nodes
-# # tree.get(83)                     # TODO: Should throw KeyError if node isn't found
+# tree.get(70)                                       # Size should be 11, 5, ...
+# # tree.get(4)                      # Should throw KeyError if node isn't found

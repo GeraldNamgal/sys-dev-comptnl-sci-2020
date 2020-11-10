@@ -22,7 +22,7 @@ def get_list_of_sentences(chapter1='swansway-chapter1.txt'):
 
 def longest_sentence():
     list_of_sentences = get_list_of_sentences()
-    # TODO: Debugging
+    # Debugging
     # print(list_of_sentences)
 
     def word_count(sentence):
@@ -34,5 +34,5 @@ def longest_sentence():
     return list_of_sentences.for_each(word_count).reduce_right(higher)
 
 
-# TODO: Debugging...
+# Debugging...
 # print(longest_sentence())

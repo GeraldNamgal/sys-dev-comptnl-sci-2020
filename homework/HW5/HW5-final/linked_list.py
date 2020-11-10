@@ -81,7 +81,7 @@ class Nil():
         return self
 
 
-# TODO: Debugging...
+# Debugging...
 # # Create a linked list
 # llist = Nil().append(6)
 #

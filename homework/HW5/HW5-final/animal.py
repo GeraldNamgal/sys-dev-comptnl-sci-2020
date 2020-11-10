@@ -36,7 +36,7 @@ class Animal:
         self._species = into
 
 
-# TODO: Debugging...
+# Debugging...
 # dog = Animal('Fido', 'dog')
 # print(dog.species)
 # dog.species = 'cat'
