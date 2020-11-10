@@ -97,7 +97,7 @@ class Nil():
 # # Print elements
 # print(llist)
 #
-# PART B demo + append demo
+# # PART B demo + append demo
 # l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
 # print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
 # def square(x):
@@ -106,6 +106,8 @@ class Nil():
 # print(l.for_each(square))
 # l = Nil().append(1).append(2).append(3).append(4)
 # print(f'\n{type(l)}, {l.head}, {type(l.tail)}; {l.tail}, {len(l.tail)}\n')
+# def square(x):
+#     return x**2
 # print(l)
 # print(l.for_each(square))
 #
@@ -119,8 +121,10 @@ class Nil():
 #     return a if a > b else b
 # print(l.reduce_right(bigger))
 #
-# # Testing getitem
+# # Testing getitem + one-element linked lists
+# l = Nil().prepend(1).prepend(2).prepend(3).prepend(4)
 # print(l[1])                      # Should be 3
-#
 # l = Nil().prepend(12)            # One-element linked list
+# def smaller(a, b): # our "combine" function
+#     return a if a < b else b
 # print(l.reduce_right(smaller))   # Should be 12
