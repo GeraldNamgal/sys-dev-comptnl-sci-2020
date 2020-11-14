@@ -6,7 +6,7 @@ class BSTNode:
         self.left, self.right = None, None
         self.size = 1
 
-    # TODO: Remove size printing when submit
+    # TODO: Remove size printing when submit including space before bracket
     def __str__(self):
         return f'BSTNode({self.key}, {self.val}) [SIZE={self.size}]' + \
                '\n|\n|-(L)->' + '\n|      '.join(str(self.left).split('\n')) + \
