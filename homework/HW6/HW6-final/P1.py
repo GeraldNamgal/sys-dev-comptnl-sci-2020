@@ -125,31 +125,55 @@ class DFSTraversalTypes(Enum):
     POSTORDER = 3
 
 
+# Referenced https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
 class DFSTraversal():
     def __init__(self, tree: BSTTable, traversalType: DFSTraversalTypes):
-        # TODO: implement
-        pass
+        self.nodes = []
+        self.index = 0
+        self.num_nodes = len(tree)
+
+        if traversalType is DFSTraversalTypes.INORDER:
+            self.inorder(tree)
+        elif traversalType is DFSTraversalTypes.PREORDER:
+            self.preorder(tree)
+        elif traversalType is DFSTraversalTypes.POSTORDER:
+            self.postorder(tree)
 
     def __iter__(self):
-        # TODO: implement
-        pass
+        return self
 
     def __next__(self):
-        # TODO: implement
-        pass
+        if self.index >= self.num_nodes:
+            raise StopIteration()
+        node = self.nodes[self.index]
+        self.index += 1
+        return node
 
     def inorder(self, bst: BSTTable):
-        # TODO: implement
+        self._inorder(bst._root)
         return
 
+    def _inorder(self, node):
+        if node:
+            self._inorder(node.left)
+            self.nodes.append(node)
+            self._inorder(node.right)
+
     def preorder(self, bst: BSTTable):
+        self._preorder(bst._root)
+        return
+
+    def _preorder(self, node):
         # TODO: implement
         return
 
     def postorder(self, bst: BSTTable):
-        # TODO: implement
+        self._postorder(bst._root)
         return
 
+    def _postorder(self, node):
+        # TODO: implement
+        return
 
 # TODO: Debugging...
 # # Part A
@@ -167,15 +191,34 @@ class DFSTraversal():
 # print(t._root)
 # print()
 # print(t._removemin(t._root))
-# Part B
-t = BSTTable()
-t.put(5, 'a')
-t.put(1, 'b')
-t.put(2, 'c')
-t.put(0, 'd')
-print(t._root)
+# # Part B
+# t = BSTTable()
+# t.put(5, 'a')
+# t.put(1, 'b')
+# t.put(2, 'c')
+# t.put(0, 'd')
+# print(t._root)
+# print()
+# print(t._remove(t._root, 5))
+# print()
+# print(t._remove(t._remove(t._root, 5), 1))
+# # print(t._remove(t._root, 10))   # Should return an error
+# Part C
+input_array = [(4, 'a'), (9, 'c'), (2, 'f'), (3, 'z'), (11, 'i'), (8, 'r')]
+bst = BSTTable()
+for key, val in input_array:
+    bst.put(key, val)
+# print(bst)
+traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
+for node in traversal:
+    print(str(node.key) + ', ' + node.val)
 print()
-print(t._remove(t._root, 5))
-print()
-print(t._remove(t._remove(t._root, 5), 1))
-# print(t._remove(t._root, 10))   # Should return an error
+traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
+check = iter(traversal)
+print(str(next(check).key))
+print(str(next(check).key))
+print(str(next(check).key))
+print(str(next(check).key))
+print(str(next(check).key))
+print(str(next(check).key))
+# print(str(next(check).key))      # Should throw an error
