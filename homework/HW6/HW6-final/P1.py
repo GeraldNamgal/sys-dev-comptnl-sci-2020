@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+from enum import Enum
+
+
 class BSTNode:
     def __init__(self, key, val):
         self.key, self.val = key, val
@@ -114,6 +117,38 @@ class BSTTable:
             return node
         else:
             return self._getmin(node.left)
+
+
+class DFSTraversalTypes(Enum):
+    PREORDER = 1
+    INORDER = 2
+    POSTORDER = 3
+
+
+class DFSTraversal():
+    def __init__(self, tree: BSTTable, traversalType: DFSTraversalTypes):
+        # TODO: implement
+        pass
+
+    def __iter__(self):
+        # TODO: implement
+        pass
+
+    def __next__(self):
+        # TODO: implement
+        pass
+
+    def inorder(self, bst: BSTTable):
+        # TODO: implement
+        return
+
+    def preorder(self, bst: BSTTable):
+        # TODO: implement
+        return
+
+    def postorder(self, bst: BSTTable):
+        # TODO: implement
+        return
 
 
 # TODO: Debugging...
