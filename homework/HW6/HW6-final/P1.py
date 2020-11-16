@@ -164,16 +164,21 @@ class DFSTraversal():
         return
 
     def _preorder(self, node):
-        # TODO: implement
-        return
+        if node:
+            self.nodes.append(node)
+            self._preorder(node.left)
+            self._preorder(node.right)
 
     def postorder(self, bst: BSTTable):
         self._postorder(bst._root)
         return
 
     def _postorder(self, node):
-        # TODO: implement
-        return
+        if node:
+            self._postorder(node.left)
+            self._postorder(node.right)
+            self.nodes.append(node)
+
 
 # TODO: Debugging...
 # # Part A
@@ -203,22 +208,50 @@ class DFSTraversal():
 # print()
 # print(t._remove(t._remove(t._root, 5), 1))
 # # print(t._remove(t._root, 10))   # Should return an error
-# Part C
-input_array = [(4, 'a'), (9, 'c'), (2, 'f'), (3, 'z'), (11, 'i'), (8, 'r')]
-bst = BSTTable()
-for key, val in input_array:
-    bst.put(key, val)
-# print(bst)
-traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
-for node in traversal:
-    print(str(node.key) + ', ' + node.val)
-print()
-traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
-check = iter(traversal)
-print(str(next(check).key))
-print(str(next(check).key))
-print(str(next(check).key))
-print(str(next(check).key))
-print(str(next(check).key))
-print(str(next(check).key))
-# print(str(next(check).key))      # Should throw an error
+# # Part C
+# input_array = [(4, 'a'), (9, 'c'), (2, 'f'), (3, 'z'), (11, 'i'), (8, 'r')]
+# bst = BSTTable()
+# for key, val in input_array:
+#     bst.put(key, val)
+# # print(bst)
+# traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
+# for node in traversal:
+#     print(str(node.key) + ', ' + node.val)
+# print()
+# traversal = DFSTraversal(bst, DFSTraversalTypes.INORDER)
+# check = iter(traversal)
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# # print(str(next(check).key))      # Should throw an error
+# print()
+# traversal = DFSTraversal(bst, DFSTraversalTypes.PREORDER)
+# for node in traversal:
+#     print(str(node.key) + ', ' + node.val)
+# print()
+# traversal = DFSTraversal(bst, DFSTraversalTypes.PREORDER)
+# check = iter(traversal)
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# # print(str(next(check).key))      # Should throw an error
+# print()
+# traversal = DFSTraversal(bst, DFSTraversalTypes.POSTORDER)
+# for node in traversal:
+#     print(str(node.key) + ', ' + node.val)
+# print()
+# traversal = DFSTraversal(bst, DFSTraversalTypes.POSTORDER)
+# check = iter(traversal)
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# print(str(next(check).key))
+# # print(str(next(check).key))      # Should throw an error
