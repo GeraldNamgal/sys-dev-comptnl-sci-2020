@@ -1,11 +1,14 @@
+#!/usr/bin/env python3
+
 #Coder: Moriya Dechtiar
 #Sharer: Gerald Arocena
 #Listener: Kaiwen Li
+
 import reprlib
 
-def wordGen(words):
-    for word in words:
-        yield word
+# def wordGen(words):
+#     for word in words:
+#         yield word
             
 class Sentence:
     def __init__(self, text): 
@@ -13,7 +16,9 @@ class Sentence:
         self.words = text.split()
 
     def __iter__(self):
-        return wordGen(self.words)
+        # return wordGen(self.words)
+        for word in self.words:
+            yield word
 
     def __repr__(self):
         return 'Sentence(%s)' % reprlib.repr(self.text)
@@ -28,4 +33,4 @@ print(next(check))
 print(next(check))
 print(next(check))
 print(next(check))
-print(next(check))
+# print(next(check))       # This should return an error
