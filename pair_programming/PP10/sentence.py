@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 
-#Coder: Moriya Dechtiar
-#Sharer: Gerald Arocena
-#Listener: Kaiwen Li
+# Coder: Moriya Dechtiar
+# Sharer: Gerald Arocena
+# Listener: Kaiwen Li
 
 import reprlib
 
 # def wordGen(words):
 #     for word in words:
 #         yield word
-            
+
+
 class Sentence:
     def __init__(self, text): 
         self.text = text
@@ -23,14 +24,14 @@ class Sentence:
     def __repr__(self):
         return 'Sentence(%s)' % reprlib.repr(self.text)
 
-
-line = Sentence("This is my sentence")
-for i in line:
-    print(i)
-
-check = iter(line)
-print(next(check))
-print(next(check))
-print(next(check))
-print(next(check))
+# Demo
+# line = Sentence("This is my sentence")
+# for i in line:
+#     print(i)
+#
+# check = iter(line)
+# print(next(check))
+# print(next(check))
+# print(next(check))
+# print(next(check))
 # print(next(check))       # This should return an error
