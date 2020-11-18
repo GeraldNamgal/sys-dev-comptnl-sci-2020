@@ -71,8 +71,8 @@ class Heap:
             if self.elements[right_idx] < self.elements[idx_of_min]:  # New min?
                 idx_of_min = right_idx
         if idx_of_min != idx:                # Was a new min set?
-            self.swap(idx, idx_of_min)       # Swap nodes
-            self.heapify(idx_of_min)         # Recurse on new min
+            self.swap(idx, idx_of_min)       # Swap node and parent
+            self.heapify(idx_of_min)         # Recurse on parent at new idx
 
     def build_heap(self) -> None:
         idx = self.parent(self.size - 1)     # Start at last subtree
