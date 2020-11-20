@@ -83,10 +83,27 @@ class Heap:
                 self.heapify(idx)
                 idx -= 1                     # Preceding subtree
 
+    def heappush(self, key: int) -> None:
+        self.elements.append(key)
+        self.size += 1
+        tmp_idx = self.size - 1              # Bubble up appended element...
+        while self.elements[tmp_idx] < self.elements[self.parent(tmp_idx)]:
+            self.swap(tmp_idx, self.parent(tmp_idx))
+            tmp_idx = self.parent(tmp_idx)
+
+    def heappop(self) -> int:
+        # TODO: implement
+        pass
+
 
 # TODO: Debugging
 # Part A
 h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
 print(h)
 g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
+print(g)
+# Part B
+g.heappush(6)
+print(g)
+g.heappush(-1)
 print(g)
