@@ -91,9 +91,14 @@ class Heap:
             self.swap(tmp_idx, self.parent(tmp_idx))
             tmp_idx = self.parent(tmp_idx)
 
+    # Referenced https://stackoverflow.com/questions/627435/how-to-remove-an-element-from-a-list-by-index
     def heappop(self) -> int:
-        # TODO: implement
-        pass
+        root = self.elements[0]
+        self.swap(0, self.size - 1)
+        del self.elements[-1]
+        self.size -= 1
+        self.heapify(0)
+        return root
 
 
 # TODO: Debugging
@@ -106,4 +111,7 @@ print(g)
 g.heappush(6)
 print(g)
 g.heappush(-1)
+print(g)
+print(g.heappop())
+print()
 print(g)
