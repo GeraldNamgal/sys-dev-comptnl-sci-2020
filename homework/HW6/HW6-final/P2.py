@@ -56,6 +56,10 @@ class Heap:
     def __len__(self) -> str:
         return self.size
 
+    # TODO: override this in your dervied classes
+    def compare(self, a: int, b: int) -> bool:
+        raise NotImplementedError
+
     def heapify(self, idx: int) -> None:
         idx_of_min = idx                     # Set parent as min for now
         left_idx = self.left(idx)
@@ -64,11 +68,11 @@ class Heap:
         # TODO: Debugging (remove later)
         # print(self)
 
-        if left_idx < self.size:             # Is indexable/inbounds?
-            if self.elements[left_idx] < self.elements[idx_of_min]:   # New min?
+        if left_idx < self.size:             # Indexable / in bounds?
+            if self.compare(left_idx, idx_of_min):      # New min?
                 idx_of_min = left_idx
-        if right_idx < self.size:            # Is indexable/inbounds?
-            if self.elements[right_idx] < self.elements[idx_of_min]:  # New min?
+        if right_idx < self.size:            # Indexable / in bounds?
+            if self.compare(right_idx, idx_of_min):     # New min?
                 idx_of_min = right_idx
         if idx_of_min != idx:                # Was a new min set?
             self.swap(idx, idx_of_min)       # Swap node and parent
@@ -87,7 +91,7 @@ class Heap:
         self.elements.append(key)
         self.size += 1
         tmp_idx = self.size - 1              # Bubble up appended element...
-        while self.elements[tmp_idx] < self.elements[self.parent(tmp_idx)]:
+        while self.compare(tmp_idx, self.parent(tmp_idx)):
             self.swap(tmp_idx, self.parent(tmp_idx))
             tmp_idx = self.parent(tmp_idx)
 
@@ -97,21 +101,42 @@ class Heap:
         self.swap(0, self.size - 1)
         del self.elements[-1]
         self.size -= 1
+        # TODO: Debugging (remove later)
+        print(f'Root is now: {self.elements[0]}')
         self.heapify(0)
         return root
 
 
+class MinHeap(Heap):
+    def compare(self, a: int, b: int) -> bool:
+        if (self.elements[a] < self.elements[b]):
+            return True
+        return False
+
+
+class MaxHeap(Heap):
+    def compare(self, a: int, b: int) -> bool:
+        if (self.elements[a] > self.elements[b]):
+            return True
+        return False
+
+
 # TODO: Debugging
-# Part A
-h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
-print(h)
-g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
-print(g)
-# Part B
-g.heappush(6)
-print(g)
-g.heappush(-1)
-print(g)
-print(g.heappop())
-print()
-print(g)
+# # Part A
+# h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
+# print(h)
+# g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
+# print(g)
+# # Part B
+# g.heappush(6)
+# print(g)
+# g.heappush(-1)
+# print(g)
+# print(f'Removed/popped root: {g.heappop()}')
+# print()
+# print(g)
+# # Part C
+# mn = MinHeap([1,2,3,4,5])
+# mx = MaxHeap([1,2,3,4,5])
+# print(mn)
+# print(mx)
