@@ -3,6 +3,7 @@
 from random import sample
 from time import time
 from P2 import *
+import heapq
 
 
 class PriorityQueue:
@@ -108,13 +109,22 @@ class HeapPriorityQueue(PriorityQueue):
 
     def peek(self):
         super().peek()
-        root = self.elements.heappop()
-        self.elements.heappush(root)
-        return root
+        return self.elements.elements[0]
 
 
+# Referenced https://www.tutorialspoint.com/python_data_structure/python_heaps.htm
 class PythonHeapPriorityQueue(PriorityQueue):
-    pass  # TODO
+    def put(self, val):
+        super().put(val)
+        heapq.heappush(self.elements, val)
+
+    def get(self):
+        super().get()
+        return heapq.heappop(self.elements)
+
+    def peek(self):
+        super().peek()
+        return self.elements[0]
 
 
 # TODO: Debugging
@@ -127,8 +137,8 @@ class PythonHeapPriorityQueue(PriorityQueue):
 # print(q.get())
 # print(q.get())
 # # print(q.get())  # Should raise an error
-
-# Part B          # (Should match Part A's prints)
+# print()
+# # Part B          # (Should match Part A's prints)
 # q = HeapPriorityQueue(2)
 # q.put(1)
 # q.put(2)
@@ -137,5 +147,12 @@ class PythonHeapPriorityQueue(PriorityQueue):
 # print(q.get())
 # print(q.get())
 # # print(q.get())  # Should raise an error
-
-
+# print()
+# q = PythonHeapPriorityQueue(2)
+# q.put(1)
+# q.put(2)
+# # q.put(3)        # Should throw an error
+# print(q.peek())
+# print(q.get())
+# print(q.get())
+# # print(q.get())  # Should raise an error
