@@ -59,21 +59,22 @@ class Heap:
     def compare(self, a: int, b: int) -> bool:
         raise NotImplementedError
 
+    # TODO: Change min to extreme or something else
     def heapify(self, idx: int) -> None:
-        idx_of_min = idx                     # Set parent as min for now
-        left_idx = self.left(idx)
-        right_idx = self.right(idx)
+        idx_of_min = idx                     # Set parent as extreme for now
+        left_idx = self.left(idx)            # Left child idx
+        right_idx = self.right(idx)          # Right child idx
 
         # TODO: Debugging (remove later)
         # print(self)
 
         if left_idx < self.size:             # Indexable / in bounds?
-            if self.compare(left_idx, idx_of_min):      # New min?
+            if self.compare(left_idx, idx_of_min):      # Change extreme?
                 idx_of_min = left_idx
         if right_idx < self.size:            # Indexable / in bounds?
-            if self.compare(right_idx, idx_of_min):     # New min?
+            if self.compare(right_idx, idx_of_min):     # Change extreme?
                 idx_of_min = right_idx
-        if idx_of_min != idx:                # Was a new min set?
+        if idx_of_min != idx:                # Extreme no longer parent?
             self.swap(idx, idx_of_min)       # Swap node and parent
             self.heapify(idx_of_min)         # Recurse on parent at new idx
 
@@ -106,10 +107,6 @@ class Heap:
         self.swap(0, self.size - 1)
         del self.elements[self.size - 1]
         self.size -= 1
-
-        # # TODO: Debugging (remove later)
-        # print(f'Root is now: {self.elements[0]}')
-
         # TODO: Only heapify if list isn't empty?
         if self.size > 0:
             self.heapify(0)
@@ -121,6 +118,7 @@ class MinHeap(Heap):
         if self.elements[a] < self.elements[b]:
             return True
         return False
+
 
 # TODO: Check that this works
 class MaxHeap(Heap):

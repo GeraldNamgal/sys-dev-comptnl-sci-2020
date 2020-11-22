@@ -132,22 +132,29 @@ class HeapPriorityQueue(PriorityQueue):
         return root
 
 
+class PythonHeapPriorityQueue(PriorityQueue):
+    pass  # TODO
+
+
 # TODO: Debugging
-# Part A
-q = NaivePriorityQueue(2)
-q.put(1)
-q.put(2)
-# q.put(3)        # Should throw an error
-print(q.peek())
-print(q.get())
-print(q.get())
-# print(q.get())  # Should raise an error
-# Part B          # (Should match Part A's prints)
-q = HeapPriorityQueue(2)
-q.put(1)
-q.put(2)
-# q.put(3)        # Should throw an error
-print(q.peek())
-print(q.get())
-print(q.get())
-# print(q.get())  # Should raise an error
+# # Part A
+# q = NaivePriorityQueue(2)
+# q.put(1)
+# q.put(2)
+# # q.put(3)        # Should throw an error
+# print(q.peek())
+# print(q.get())
+# print(q.get())
+# # print(q.get())  # Should raise an error
+
+# # Part B          # (Should match Part A's prints)
+# q = HeapPriorityQueue(2)
+# q.put(1)
+# q.put(2)
+# # q.put(3)        # Should throw an error
+# print(q.peek())
+# print(q.get())
+# print(q.get())
+# # print(q.get())  # Should raise an error
+
+# Part C
