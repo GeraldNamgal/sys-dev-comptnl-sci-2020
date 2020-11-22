@@ -59,38 +59,36 @@ class Heap:
     def compare(self, a: int, b: int) -> bool:
         raise NotImplementedError
 
-    # TODO: Change min to extreme or something else
     def heapify(self, idx: int) -> None:
-        idx_of_min = idx                     # Set parent as extreme for now
-        left_idx = self.left(idx)            # Left child idx
-        right_idx = self.right(idx)          # Right child idx
+        idx_of_extreme = idx                    # Set parent as extreme for now
 
-        # TODO: Debugging (remove later)
-        # print(self)
+        left_idx = self.left(idx)               # Left child idx
+        if left_idx < self.size:                # Indexable / in bounds?
+            if self.compare(left_idx, idx_of_extreme):      # Change extreme?
+                idx_of_extreme = left_idx
 
-        if left_idx < self.size:             # Indexable / in bounds?
-            if self.compare(left_idx, idx_of_min):      # Change extreme?
-                idx_of_min = left_idx
-        if right_idx < self.size:            # Indexable / in bounds?
-            if self.compare(right_idx, idx_of_min):     # Change extreme?
-                idx_of_min = right_idx
-        if idx_of_min != idx:                # Extreme no longer parent?
-            self.swap(idx, idx_of_min)       # Swap node and parent
-            self.heapify(idx_of_min)         # Recurse on parent at new idx
+        right_idx = self.right(idx)             # Right child idx
+        if right_idx < self.size:               # Indexable / in bounds?
+            if self.compare(right_idx, idx_of_extreme):     # Change extreme?
+                idx_of_extreme = right_idx
+
+        if idx_of_extreme != idx:               # Extreme changed from parent?
+            self.swap(idx, idx_of_extreme)      # Swap node and parent
+            self.heapify(idx_of_extreme)        # Recurse on parent at new idx
 
     def build_heap(self) -> None:
-        idx = self.parent(self.size - 1)     # Start at last subtree
+        idx = self.parent(self.size - 1)        # Start at last subtree
         while True:
-            if idx < 0:
+            if idx < 0:                         # Don't index past first element
                 break
             else:
-                self.heapify(idx)
-                idx -= 1                     # Preceding subtree
+                self.heapify(idx)               # Heapify
+                idx -= 1                        # Preceding subtree next
 
     def heappush(self, key: int) -> None:
         self.elements.append(key)
         self.size += 1
-        tmp_idx = self.size - 1              # Bubble up appended element...
+        tmp_idx = self.size - 1                 # Bubble up appended element?...
         while self.parent(tmp_idx) >= 0\
                 and self.compare(tmp_idx, self.parent(tmp_idx)):
             self.swap(tmp_idx, self.parent(tmp_idx))
@@ -103,14 +101,15 @@ class Heap:
         except Exception:
             raise
 
-        root = self.elements[0]
-        self.swap(0, self.size - 1)
-        del self.elements[self.size - 1]
+        root = self.elements[0]                 # Save root
+        self.swap(0, self.size - 1)             # Swap root with last element
+        del self.elements[self.size - 1]        # Delete last element
         self.size -= 1
-        # TODO: Only heapify if list isn't empty?
-        if self.size > 0:
-            self.heapify(0)
-        return root
+
+        if self.size > 0:                       # Are there still nodes?
+            self.heapify(0)                     # Heapify root node
+
+        return root                             # Return original root
 
 
 class MinHeap(Heap):
@@ -120,7 +119,6 @@ class MinHeap(Heap):
         return False
 
 
-# TODO: Check that this works
 class MaxHeap(Heap):
     def compare(self, a: int, b: int) -> bool:
         if self.elements[a] > self.elements[b]:
@@ -163,20 +161,20 @@ class MaxHeap(Heap):
 # print(f'size is now {mn.size}')
 # # print(mn.heappop())    # Should throw an empty error
 
-# mx = MaxHeap([1, 2, 3, 4, 5])
-# print(mx)
-# mx.heappush(-1)
-# mx.heappush(6)
-# print(mx)
-# print(mx.heappop())
-# print(mx.heappop())
-# print(mx.heappop())
-# print(mx.heappop())
-# print(mx.heappop())
-# print(mx)
-# print(mx.heappop())
-# print(mx)
-# print(mx.heappop())
-# print(mx)
-# print(f'size is now {mx.size}')
-# # print(mx.heappop())      # Should throw an empty error
+mx = MaxHeap([1, 2, 3, 4, 5])
+print(mx)
+mx.heappush(-1)
+mx.heappush(6)
+print(mx)
+print(mx.heappop())
+print(mx.heappop())
+print(mx.heappop())
+print(mx.heappop())
+print(mx.heappop())
+print(mx)
+print(mx.heappop())
+print(mx)
+print(mx.heappop())
+print(mx)
+print(f'size is now {mx.size}')
+# print(mx.heappop())      # Should throw an empty error
