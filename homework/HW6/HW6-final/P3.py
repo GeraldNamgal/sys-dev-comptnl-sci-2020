@@ -69,29 +69,32 @@ class NaivePriorityQueue(PriorityQueue):
         try:
             if len(self.elements) >= self.max_size:
                 raise IndexError('Priority queue is full')
-            self.elements.append(val)
         except Exception:
             raise
+
+        self.elements.append(val)
 
     def get(self):
         try:
             if not self.elements:
                 raise IndexError('Priority queue is empty')
-            # TODO: Are we allowed to use min() and remove()?
-            min_val = min(self.elements)
-            self.elements.remove(min_val)
-            return min_val
         except Exception:
             raise
+
+        # TODO: Are we allowed to use min() and remove()?
+        min_val = min(self.elements)
+        self.elements.remove(min_val)
+        return min_val
 
     def peek(self):
         try:
             if not self.elements:
                 raise IndexError('Priority queue is empty')
-            # TODO: Are we allowed to use min()?
-            return min(self.elements)
         except Exception:
             raise
+
+        # TODO: Are we allowed to use min()?
+        return min(self.elements)
 
 
 class HeapPriorityQueue(PriorityQueue):
@@ -103,42 +106,47 @@ class HeapPriorityQueue(PriorityQueue):
         try:
             if len(self.elements) >= self.max_size:
                 raise IndexError('Priority queue is full')
-            self.elements.heappush(val)
         except Exception:
             raise
+
+        self.elements.heappush(val)
 
     def get(self):
         try:
             if not self.elements:
                 raise IndexError('Priority queue is empty')
-            return self.elements.heappop()
         except Exception:
             raise
+
+        return self.elements.heappop()
 
     def peek(self):
         try:
             if not self.elements:
                 raise IndexError('Priority queue is empty')
-            root = self.elements.heappop()
-            self.elements.heappush(root)
-            return root
         except Exception:
             raise
 
+        root = self.elements.heappop()
+        self.elements.heappush(root)
+        return root
+
 
 # TODO: Debugging
-# # Part A
-# q = NaivePriorityQueue(2)
-# q.put(1)
-# q.put(2)
-# print(q.peek())
-# print(q.get())
-# print(q.get())
-# # print(q.get())  # Should raise an error
-# Part B
+# Part A
+q = NaivePriorityQueue(2)
+q.put(1)
+q.put(2)
+# q.put(3)        # Should throw an error
+print(q.peek())
+print(q.get())
+print(q.get())
+# print(q.get())  # Should raise an error
+# Part B          # (Should match Part A's prints)
 q = HeapPriorityQueue(2)
 q.put(1)
 q.put(2)
+# q.put(3)        # Should throw an error
 print(q.peek())
 print(q.get())
 print(q.get())

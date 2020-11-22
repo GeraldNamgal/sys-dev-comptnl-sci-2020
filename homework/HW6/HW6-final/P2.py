@@ -56,7 +56,6 @@ class Heap:
     def __len__(self) -> str:
         return self.size
 
-    # TODO: override this in your dervied classes
     def compare(self, a: int, b: int) -> bool:
         raise NotImplementedError
 
@@ -91,33 +90,42 @@ class Heap:
         self.elements.append(key)
         self.size += 1
         tmp_idx = self.size - 1              # Bubble up appended element...
-        while self.parent(tmp_idx) >= 0:
-            if self.compare(tmp_idx, self.parent(tmp_idx)):
-                self.swap(tmp_idx, self.parent(tmp_idx))
-                tmp_idx = self.parent(tmp_idx)
+        while self.parent(tmp_idx) >= 0\
+                and self.compare(tmp_idx, self.parent(tmp_idx)):
+            self.swap(tmp_idx, self.parent(tmp_idx))
+            tmp_idx = self.parent(tmp_idx)
 
-    # Referenced https://stackoverflow.com/questions/627435/how-to-remove-an-element-from-a-list-by-index
     def heappop(self) -> int:
+        try:
+            if self.size <= 0:
+                raise IndexError('Heap is empty')
+        except Exception:
+            raise
+
         root = self.elements[0]
         self.swap(0, self.size - 1)
-        del self.elements[-1]
+        del self.elements[self.size - 1]
         self.size -= 1
+
         # # TODO: Debugging (remove later)
         # print(f'Root is now: {self.elements[0]}')
-        self.heapify(0)
+
+        # TODO: Only heapify if list isn't empty?
+        if self.size > 0:
+            self.heapify(0)
         return root
 
 
 class MinHeap(Heap):
     def compare(self, a: int, b: int) -> bool:
-        if (self.elements[a] < self.elements[b]):
+        if self.elements[a] < self.elements[b]:
             return True
         return False
 
-
+# TODO: Check that this works
 class MaxHeap(Heap):
     def compare(self, a: int, b: int) -> bool:
-        if (self.elements[a] > self.elements[b]):
+        if self.elements[a] > self.elements[b]:
             return True
         return False
 
@@ -128,6 +136,7 @@ class MaxHeap(Heap):
 # print(h)
 # g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
 # print(g)
+
 # # Part B
 # g.heappush(6)
 # print(g)
@@ -136,10 +145,40 @@ class MaxHeap(Heap):
 # print(f'Removed/popped root: {g.heappop()}')
 # print()
 # print(g)
-# Part C
-mn = MinHeap([1, 2, 3, 4, 5])
-mx = MaxHeap([1, 2, 3, 4, 5])
-print(mn)
+
+# # Part C
+# mn = MinHeap([1, 2, 3, 4, 5])
+# print(mn)
+# mn.heappush(-1)
+# mn.heappush(6)
+# print(mn)
+# print(mn.heappop())
+# print(mn.heappop())
+# print(mn.heappop())
+# print(mn.heappop())
+# print(mn.heappop())
+# print(mn)
+# print(mn.heappop())
+# print(mn)
+# print(mn.heappop())
+# print(mn)
+# print(f'size is now {mn.size}')
+# # print(mn.heappop())    # Should throw an empty error
+
+# mx = MaxHeap([1, 2, 3, 4, 5])
 # print(mx)
-mn.heappush(-1)
-print(mn)
+# mx.heappush(-1)
+# mx.heappush(6)
+# print(mx)
+# print(mx.heappop())
+# print(mx.heappop())
+# print(mx.heappop())
+# print(mx.heappop())
+# print(mx.heappop())
+# print(mx)
+# print(mx.heappop())
+# print(mx)
+# print(mx.heappop())
+# print(mx)
+# print(f'size is now {mx.size}')
+# # print(mx.heappop())      # Should throw an empty error
