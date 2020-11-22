@@ -16,14 +16,27 @@ class PriorityQueue:
     def __bool__(self):
         return len(self.elements) > 0
 
+    # TODO: Are these three a common factor in the subclasses? -- Test this
     def put(self, val):
-        raise NotImplementedError  # TODO
+        try:
+            if len(self.elements) >= self.max_size:
+                raise IndexError('Priority queue is full')
+        except Exception:
+            raise
 
     def get(self):
-        raise NotImplementedError  # TODO
+        try:
+            if not self.elements:
+                raise IndexError('Priority queue is empty')
+        except Exception:
+            raise
 
     def peek(self):
-        raise NotImplementedError  # TODO
+        try:
+            if not self.elements:
+                raise IndexError('Priority queue is empty')
+        except Exception:
+            raise
 
 
 def mergesortedlists(lists, pqclass=PriorityQueue):
@@ -66,34 +79,17 @@ def timeit(ns=(10, 20, 50, 100, 200, 500), pqclass=PriorityQueue, n_average=5):
 
 class NaivePriorityQueue(PriorityQueue):
     def put(self, val):
-        try:
-            if len(self.elements) >= self.max_size:
-                raise IndexError('Priority queue is full')
-        except Exception:
-            raise
-
+        super().put(val)
         self.elements.append(val)
 
     def get(self):
-        try:
-            if not self.elements:
-                raise IndexError('Priority queue is empty')
-        except Exception:
-            raise
-
-        # TODO: Are we allowed to use min() and remove()?
+        super().get()
         min_val = min(self.elements)
         self.elements.remove(min_val)
         return min_val
 
     def peek(self):
-        try:
-            if not self.elements:
-                raise IndexError('Priority queue is empty')
-        except Exception:
-            raise
-
-        # TODO: Are we allowed to use min()?
+        super().peek()
         return min(self.elements)
 
 
@@ -103,30 +99,15 @@ class HeapPriorityQueue(PriorityQueue):
         self.elements = MinHeap([])
 
     def put(self, val):
-        try:
-            if len(self.elements) >= self.max_size:
-                raise IndexError('Priority queue is full')
-        except Exception:
-            raise
-
+        super().put(val)
         self.elements.heappush(val)
 
     def get(self):
-        try:
-            if not self.elements:
-                raise IndexError('Priority queue is empty')
-        except Exception:
-            raise
-
+        super().get()
         return self.elements.heappop()
 
     def peek(self):
-        try:
-            if not self.elements:
-                raise IndexError('Priority queue is empty')
-        except Exception:
-            raise
-
+        super().peek()
         root = self.elements.heappop()
         self.elements.heappush(root)
         return root
@@ -147,7 +128,7 @@ class PythonHeapPriorityQueue(PriorityQueue):
 # print(q.get())
 # # print(q.get())  # Should raise an error
 
-# # Part B          # (Should match Part A's prints)
+# Part B          # (Should match Part A's prints)
 # q = HeapPriorityQueue(2)
 # q.put(1)
 # q.put(2)
@@ -157,4 +138,4 @@ class PythonHeapPriorityQueue(PriorityQueue):
 # print(q.get())
 # # print(q.get())  # Should raise an error
 
-# Part C
+
