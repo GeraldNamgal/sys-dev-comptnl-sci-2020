@@ -91,9 +91,10 @@ class Heap:
         self.elements.append(key)
         self.size += 1
         tmp_idx = self.size - 1              # Bubble up appended element...
-        while self.compare(tmp_idx, self.parent(tmp_idx)):
-            self.swap(tmp_idx, self.parent(tmp_idx))
-            tmp_idx = self.parent(tmp_idx)
+        while self.parent(tmp_idx) >= 0:
+            if self.compare(tmp_idx, self.parent(tmp_idx)):
+                self.swap(tmp_idx, self.parent(tmp_idx))
+                tmp_idx = self.parent(tmp_idx)
 
     # Referenced https://stackoverflow.com/questions/627435/how-to-remove-an-element-from-a-list-by-index
     def heappop(self) -> int:
@@ -101,8 +102,8 @@ class Heap:
         self.swap(0, self.size - 1)
         del self.elements[-1]
         self.size -= 1
-        # TODO: Debugging (remove later)
-        print(f'Root is now: {self.elements[0]}')
+        # # TODO: Debugging (remove later)
+        # print(f'Root is now: {self.elements[0]}')
         self.heapify(0)
         return root
 
@@ -135,8 +136,10 @@ class MaxHeap(Heap):
 # print(f'Removed/popped root: {g.heappop()}')
 # print()
 # print(g)
-# # Part C
-# mn = MinHeap([1,2,3,4,5])
-# mx = MaxHeap([1,2,3,4,5])
-# print(mn)
+# Part C
+mn = MinHeap([1, 2, 3, 4, 5])
+mx = MaxHeap([1, 2, 3, 4, 5])
+print(mn)
 # print(mx)
+mn.heappush(-1)
+print(mn)

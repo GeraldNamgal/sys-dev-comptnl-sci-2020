@@ -2,7 +2,7 @@
 
 from random import sample
 from time import time
-from .P2 import *
+from P2 import *
 
 
 class PriorityQueue:
@@ -95,7 +95,36 @@ class NaivePriorityQueue(PriorityQueue):
 
 
 class HeapPriorityQueue(PriorityQueue):
-    pass  # TODO
+    def __init__(self, max_size):
+        super().__init__(max_size)
+        self.elements = MinHeap([])
+
+    def put(self, val):
+        try:
+            if len(self.elements) >= self.max_size:
+                raise IndexError('Priority queue is full')
+            self.elements.heappush(val)
+        except Exception:
+            raise
+
+    def get(self):
+        try:
+            if not self.elements:
+                raise IndexError('Priority queue is empty')
+            return self.elements.heappop()
+        except Exception:
+            raise
+
+    def peek(self):
+        try:
+            if not self.elements:
+                raise IndexError('Priority queue is empty')
+            root = self.elements.heappop()
+            self.elements.heappush(root)
+            return root
+        except Exception:
+            raise
+
 
 # TODO: Debugging
 # # Part A
@@ -105,5 +134,12 @@ class HeapPriorityQueue(PriorityQueue):
 # print(q.peek())
 # print(q.get())
 # print(q.get())
-# print(q.get())  # Should raise an error
+# # print(q.get())  # Should raise an error
 # Part B
+q = HeapPriorityQueue(2)
+q.put(1)
+q.put(2)
+print(q.peek())
+print(q.get())
+print(q.get())
+# print(q.get())  # Should raise an error
