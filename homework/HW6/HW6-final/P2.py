@@ -127,7 +127,7 @@ class MaxHeap(Heap):
 
 
 # TODO: Debugging
-# # Part A
+# # Part A     # TODO: Maybe follow up with Piazza post https://piazza.com/class/kc57xuuysdm64b?cid=501
 # h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
 # print(h)
 # g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
