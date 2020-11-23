@@ -12,6 +12,8 @@ print(hpq_lists)
 ppq_lists = timeit(ns, pqclass=PythonHeapPriorityQueue)
 print(ppq_lists)
 
+# TODO: What graphs should look like -- https://piazza.com/class/kc57xuuysdm64b?cid=473
+
 # TODO: Graphs -- Clean this up more and stuff
 # Plot the results (Elapsed Time vs. ns)
 plt.plot(ns, npq_lists, label='npq')
