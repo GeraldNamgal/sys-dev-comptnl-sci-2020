@@ -3,7 +3,7 @@
 from P3 import *
 from matplotlib import pyplot as plt
 
-ns = (10, 20, 50, 100, 200, 500)  # TODO: Define the lists sequence
+ns = (10, 20, 50, 100, 200, 500)  # TODO: Define the lists sequence -- any changes needed?
 
 npq_lists = timeit(ns, pqclass=NaivePriorityQueue)
 print(npq_lists)
@@ -12,7 +12,7 @@ print(hpq_lists)
 ppq_lists = timeit(ns, pqclass=PythonHeapPriorityQueue)
 print(ppq_lists)
 
-# TODO: Graphs
+# TODO: Graphs -- Clean this up more and stuff
 # Plot the results (Elapsed Time vs. ns)
 plt.plot(ns, npq_lists, label='npq')
 plt.plot(ns, hpq_lists, label='hpq')
