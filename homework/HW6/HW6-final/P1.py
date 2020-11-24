@@ -190,10 +190,12 @@ class DFSTraversal():
 # print(t._root)
 # print()
 # print(t._removemin(t._root))
-# t.put(0, 'd')
+# t.put(0, 'q')
 # t.put(0.5, '?')
 # print()
 # print(t._root)
+# print()
+# print(t)
 # print()
 # print(t._removemin(t._root))
 
