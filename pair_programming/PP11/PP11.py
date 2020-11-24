@@ -33,7 +33,9 @@ with open("candidates.txt") as candidates:
 
         db.commit()
 
-# # Demo
-# cursor.execute("SELECT * FROM candidates")
-# all_rows = cursor.fetchall()
-# print(all_rows)
+# Demo
+cursor.execute("SELECT * FROM candidates")
+# # all_rows = cursor.fetchall()
+# # print(all_rows)
+for i in cursor:
+    print(i)
