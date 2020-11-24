@@ -179,20 +179,16 @@ class DFSTraversal():
             self._postorder(node.right)
             self.nodes.append(node)
 
-# TODO: They changed the demo and implementation requirements for this in Piazza (for _remove)
 
 # TODO: Debugging...
 # # Part A
-t = BSTTable()
-t.put(5, 'a')
-t.put(1, 'b')
-t.put(2, 'c')
-t.put(0, 'd')
-print(t)
-print()
-print(t._remove(t._root, 2))
-print()
-print(t._remove(t._root, 1))
+# t = BSTTable()
+# t.put(5, 'a')
+# t.put(1, 'b')
+# t.put(2, 'c')
+# t.put(0, 'd')
+# print(t._root)
+# print()
 # print(t._removemin(t._root))
 # t.put(0, 'd')
 # t.put(0.5, '?')
@@ -200,6 +196,7 @@ print(t._remove(t._root, 1))
 # print(t._root)
 # print()
 # print(t._removemin(t._root))
+
 # # Part B
 # t = BSTTable()
 # t.put(5, 'a')
@@ -212,6 +209,34 @@ print(t._remove(t._root, 1))
 # print()
 # print(t._remove(t._remove(t._root, 5), 1))
 # # print(t._remove(t._root, 10))   # Should return an error
+
+# # Piazza: This demo _remove`s two nodes from the root, thus not changing the original tree
+# print('This demo _remove`s two nodes from the root, thus not changing the original tree\n')
+# t = BSTTable()
+# t.put(5, 'a')
+# t.put(1, 'b')
+# t.put(2, 'c')
+# t.put(0, 'd')
+# print(t)
+# print()
+# print(t._remove(t._root, 5))
+# print()
+# print(t._remove(t._root, 1))
+# print()
+#
+# # Piazza: This demo _remove`s two non-root nodes, thus changing the original tree
+# print('This demo _remove`s two non-root nodes, thus changing the original tree\n')
+# t2 = BSTTable()
+# t2.put(5, 'a')
+# t2.put(1, 'b')
+# t2.put(2, 'c')
+# t2.put(0, 'd')
+# print(t2)
+# print()
+# print(t2._remove(t2._root, 2))
+# print()
+# print(t2._remove(t2._root, 1))
+
 # # Part C
 # input_array = [(4, 'a'), (9, 'c'), (2, 'f'), (3, 'z'), (11, 'i'), (8, 'r')]
 # bst = BSTTable()
