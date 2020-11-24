@@ -3,7 +3,7 @@
 from P3 import *
 from matplotlib import pyplot as plt
 
-ns = (10, 20, 50, 100, 200, 500)  # TODO: Define the lists sequence -- any changes needed?
+ns = (0, 10, 20, 50, 100, 200, 500)  # TODO: Define the lists sequence -- any changes needed?
 
 npq_lists = timeit(ns, pqclass=NaivePriorityQueue)
 print(npq_lists)
