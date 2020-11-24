@@ -179,16 +179,20 @@ class DFSTraversal():
             self._postorder(node.right)
             self.nodes.append(node)
 
+# TODO: They changed the demo and implementation requirements for this in Piazza (for _remove)
 
 # TODO: Debugging...
 # # Part A
-# t = BSTTable()
-# t.put(5, 'a')
-# t.put(1, 'b')
-# t.put(2, 'c')
-# t.put(0, 'd')
-# print(t._root)
-# print()
+t = BSTTable()
+t.put(5, 'a')
+t.put(1, 'b')
+t.put(2, 'c')
+t.put(0, 'd')
+print(t)
+print()
+print(t._remove(t._root, 2))
+print()
+print(t._remove(t._root, 1))
 # print(t._removemin(t._root))
 # t.put(0, 'd')
 # t.put(0.5, '?')
