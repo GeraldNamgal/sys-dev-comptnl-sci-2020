@@ -239,6 +239,21 @@ class DFSTraversal():
 # print()
 # print(t2._remove(t2._root, 1))
 
+# # REGULAR remove testing
+# t = BSTTable()
+# t.put(5, 'a')
+# t.put(1, 'b')
+# t.put(2, 'c')
+# t.put(0, 'd')
+# print(t)
+# print()
+# t.remove(1)
+# print(t)
+# print()
+# t.remove(2)
+# print(t)
+# print()
+
 # # Part C
 # input_array = [(4, 'a'), (9, 'c'), (2, 'f'), (3, 'z'), (11, 'i'), (8, 'r')]
 # bst = BSTTable()
