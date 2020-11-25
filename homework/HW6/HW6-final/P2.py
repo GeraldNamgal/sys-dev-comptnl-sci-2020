@@ -126,7 +126,7 @@ class MaxHeap(Heap):
         return False
 
 
-# TODO: Debugging
+# Debugging
 # # Part A  # (Shouldn't work after implementing Part C)
 # h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
 # print(h)

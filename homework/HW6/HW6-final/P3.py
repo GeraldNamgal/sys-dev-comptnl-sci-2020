@@ -17,7 +17,6 @@ class PriorityQueue:
     def __bool__(self):
         return len(self.elements) > 0
 
-    # TODO: Are these three a common factor in the subclasses? -- Test this
     def put(self, val):
         try:
             if len(self.elements) >= self.max_size:
@@ -127,7 +126,7 @@ class PythonHeapPriorityQueue(PriorityQueue):
         return self.elements[0]
 
 
-# TODO: Debugging
+# Debugging
 # # Part A
 # q = NaivePriorityQueue(2)
 # q.put(1)

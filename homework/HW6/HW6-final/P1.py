@@ -9,9 +9,8 @@ class BSTNode:
         self.left, self.right = None, None
         self.size = 1
 
-    # TODO: Remove size printing when submit including space before bracket
     def __str__(self):
-        return f'BSTNode({self.key}, {self.val}) [SIZE={self.size}]' + \
+        return f'BSTNode({self.key}, {self.val})' + \
                '\n|\n|-(L)->' + '\n|      '.join(str(self.left).split('\n')) + \
                '\n|\n|-(R)->' + '\n|      '.join(str(self.right).split('\n'))
 
@@ -59,22 +58,17 @@ class BSTTable:
     def _size(node):
         return node.size if node else 0
 
-    # TODO: Check that this works with other trees like one in notebook?
     def _removemin(self, node):
         if not node:
             return node
         elif not node.left:             # At the min node?
             if node.right:              # Has a right child?
-                node = node.right         # TODO: Switch this with node = None stuff?
-                # tmp_node = node.right   # TODO: This node = None stuff necessary?
-                # node = None
-                # return tmp_node
+                node = node.right
             else:                       # No children?
                 node = None
-                # return None             # TODO: Need return (see above)?
         else:
             node.left = self._removemin(node.left)
-            node.size -= 1                # TODO: Double-check that size is updating correctly
+            node.size -= 1
         return node
 
     def remove(self, key):
@@ -82,7 +76,6 @@ class BSTTable:
         if self._removednode:           # Reset _removednode?
             self._removednode = False
 
-    # TODO
     def _remove(self, node, key):
         if not node:
             raise KeyError(f'key not found: {key}')
@@ -101,7 +94,7 @@ class BSTTable:
                 node = node.right
             elif node.right is None:
                 node = node.left
-            else:   # TODO: Test this out (Check that size is updating correctly, etc.)
+            else:
                 min_node = self._getmin(node.right)     # Min from right child
                 node.key = min_node.key
                 node.val = min_node.val
@@ -180,7 +173,7 @@ class DFSTraversal():
             self.nodes.append(node)
 
 
-# TODO: Debugging...
+# Debugging...
 # # Part A
 # t = BSTTable()
 # t.put(5, 'a')
