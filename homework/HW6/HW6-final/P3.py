@@ -138,6 +138,7 @@ class PythonHeapPriorityQueue(PriorityQueue):
 # print(q.get())
 # # print(q.get())  # Should raise an error
 # print()
+#
 # # Part B          # (Should match Part A's prints)
 # q = HeapPriorityQueue(2)
 # q.put(1)
