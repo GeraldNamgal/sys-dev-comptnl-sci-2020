@@ -127,13 +127,13 @@ class MaxHeap(Heap):
 
 
 # TODO: Debugging
-# # Part A
+# # Part A  # (Shouldn't work after implementing Part C)
 # h = Heap([-1, 0, 0, 15, 23, 1, 2, 3])  # The heap tree will be built during initialization
 # print(h)
 # g = Heap([5, 8, 1, 0, 10, -2, -4, 21])
 # print(g)
 
-# # Part B
+# # Part B  # (Shouldn't work after implementing Part C)
 # g.heappush(6)
 # print(g)
 # g.heappush(-1)
@@ -145,20 +145,21 @@ class MaxHeap(Heap):
 # # Part C
 # mn = MinHeap([1, 2, 3, 4, 5])
 # print(mn)
-# mn.heappush(-1)
 # mn.heappush(6)
+# mn.heappush(-1)
 # print(mn)
 # print(mn.heappop())
 # print(mn.heappop())
 # print(mn.heappop())
 # print(mn.heappop())
 # print(mn.heappop())
-# print(mn)
-# print(mn.heappop())
-# print(mn)
-# print(mn.heappop())
-# print(mn)
 # print(f'size is now {mn.size}')
+# print(mn)
+# print(mn.heappop())
+# print(mn)
+# print(mn.heappop())
+# print(f'size is now {mn.size}')
+# print(mn)
 # # print(mn.heappop())    # Should throw an empty error
 
 # mx = MaxHeap([1, 2, 3, 4, 5])
@@ -171,10 +172,11 @@ class MaxHeap(Heap):
 # print(mx.heappop())
 # print(mx.heappop())
 # print(mx.heappop())
-# print(mx)
-# print(mx.heappop())
-# print(mx)
-# print(mx.heappop())
-# print(mx)
 # print(f'size is now {mx.size}')
+# print(mx)
+# print(mx.heappop())
+# print(mx)
+# print(mx.heappop())
+# print(f'size is now {mx.size}')
+# print(mx)
 # # print(mx.heappop())      # Should throw an empty error
