@@ -35,8 +35,11 @@ class Markov:
     def get_weather_for_day(self, day, trials=3):  # TODO: trials default ok?
         trials_list = []
         for trial in range(trials):
+            weather_list = []
             for day in range(1, day):
+                # TODO
                 self._simulate_weather_for_day(day)
+            trials_list.append(weather_list)
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def _simulate_weather_for_day(self, day):
