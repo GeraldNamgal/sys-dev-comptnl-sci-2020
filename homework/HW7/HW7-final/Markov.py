@@ -13,6 +13,7 @@ class Markov:
         self.day_zero_weather = day_zero_weather
         self._current_day = 0
         self._current_day_weather = day_zero_weather
+        self.days_out = 0
 
     # Referenced https://janakiev.com/blog/csv-in-python/
     def load_data(self, file_path='./weather.csv'):
@@ -33,13 +34,15 @@ class Markov:
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def get_weather_for_day(self, day, trials=3):  # TODO: trials default ok?
+        self.days_out = day
         trials_list = []
         for trial in range(trials):
             weather_list = []
-            for day in range(1, day):
+            for day in iter(self):
                 # TODO
                 self._simulate_weather_for_day(day)
             trials_list.append(weather_list)
+        # TODO: Need to reset self.days_out or no need?
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def _simulate_weather_for_day(self, day):
@@ -74,8 +77,13 @@ class MarkovIterator:
             self.number_list.append(val)
 
     def __next__(self):
-        row = 1  # TODO: Row should be current day
+        if self.markov.current_day > self.markov.days_out:
+            # TODO: Reset current_day and current_day_weather to 0 and day zero weather here?
+            raise StopIteration()
+        row = self.markov.mappings.get(self.markov.current_day_weather)  # TODO: Row should be current day
         col = random.choices(self.number_list, tuple(self.markov.data[row]))
+        self.markov.current_day += 1
+        self.markov.current_day_weather = col
         return self.markov.data[row][col]
 
     def __iter__(self):
