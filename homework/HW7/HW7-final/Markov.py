@@ -2,8 +2,7 @@
 
 import numpy as np
 import random
-from collections import OrderedDict, Counter
-from statistics import mode
+from collections import OrderedDict
 
 
 class Markov:
@@ -45,28 +44,19 @@ class Markov:
         return self.data[row][col]
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
-    def get_weather_for_day(self, day, trials=3):  # TODO: trials default sensible?
+    def get_weather_for_day(self, day, trials=1):  # TODO: trials default sensible?
         trials_list = []
         for trial in range(trials):
             trials_list.append(self._simulate_weather_for_day(day))
-
-        # TODO: Debugging
-        print(trials_list)
-        print(mode(trials_list))
-        # Referenced https: // stackoverflow.com / questions / 2600191 / how - can - i - count - the - occurrences - of - a - list - item
-        print(Counter(trials_list))
+        return trials_list
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def _simulate_weather_for_day(self, day):
         self.days_out = day
         predicted_weather = None
-
         for day in self:
-            # print(day)  # TODO: Debugging
+            # print(day)  # Debugging
             predicted_weather = day
-
-        # print()  # TODO: Debugging
-
         return predicted_weather
 
     def __iter__(self):
@@ -112,10 +102,9 @@ class MarkovIterator:
     def __iter__(self):
         self
 
-
-# TODO: Debugging
-example = Markov('ClOudy')
-example.load_data(file_path='./weather.csv')
-# print(example.get_prob('sunny', 'clOudy'))  # This line should print 0.3
-# print(example.get_prob('clouDy', 'windy'))  # This line should print 0.08
-example.get_weather_for_day(2, 7)
+# # Debugging
+# example = Markov('ClOudy')
+# example.load_data(file_path='./weather.csv')
+# # print(example.get_prob('sunny', 'clOudy'))  # This line should print 0.3
+# # print(example.get_prob('clouDy', 'windy'))  # This line should print 0.08
+# trials_list = example.get_weather_for_day(2, 7)
