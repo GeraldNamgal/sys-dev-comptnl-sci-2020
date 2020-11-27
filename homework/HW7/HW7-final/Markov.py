@@ -9,12 +9,22 @@ class Markov:
     mappings = OrderedDict([('sunny', 0), ('cloudy', 1), ('rainy', 2),
                             ('snowy', 3), ('windy', 4), ('hailing', 5)])
 
+    @staticmethod
+    def validate_weather(weather):
+        try:
+            if weather not in Markov.mappings:
+                raise ValueError('Invalid weather type entered')
+        except Exception:
+            raise
+
     def __init__(self, day_zero_weather=None):
         self.data = []
         self._current_day_weather = None
         if type(day_zero_weather) == str:
-            self.day_zero_weather = day_zero_weather.lower()
-            self._current_day_weather = day_zero_weather.lower()
+            day_zero_weather = day_zero_weather.lower()
+            Markov.validate_weather(day_zero_weather)
+            self.day_zero_weather = day_zero_weather
+            self._current_day_weather = day_zero_weather
         self._current_day = 0
         self.days_out = None        # Helper attribute
 
@@ -25,14 +35,10 @@ class Markov:
     def get_prob(self, current_day_weather, next_day_weather):
         current_day_weather = current_day_weather.lower()
         next_day_weather = next_day_weather.lower()
-        try:
-            if current_day_weather not in self.mappings\
-                    or next_day_weather not in self.mappings:
-                raise ValueError('Invalid weather type entered')
-        except Exception:
-            raise
-        row = self.mappings[current_day_weather]
-        col = self.mappings[next_day_weather]
+        Markov.validate_weather(current_day_weather)
+        Markov.validate_weather(next_day_weather)
+        row = Markov.mappings[current_day_weather]
+        col = Markov.mappings[next_day_weather]
         return self.data[row][col]
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
@@ -89,9 +95,9 @@ class MarkovIterator:
             self.markov.current_day_weather = self.markov.day_zero_weather
             raise StopIteration()
         else:
-            odds_row = self.markov.mappings[self.markov.current_day_weather]
+            odds_row = Markov.mappings[self.markov.current_day_weather]
             # TODO: Check what random.choices is returning
-            next_day_weather = random.choices(list(self.markov.mappings.keys()),
+            next_day_weather = random.choices(list(Markov.mappings.keys()),
                                               self.markov.data[odds_row])[0]  # TODO: How to get value back not in array?
         self.markov.current_day += 1
         self.markov.current_day_weather = next_day_weather
