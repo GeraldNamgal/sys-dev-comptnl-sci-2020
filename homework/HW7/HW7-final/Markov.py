@@ -24,7 +24,7 @@ class Markov:
             Markov.validate_weather(day_zero_weather)
             self.day_zero_weather = day_zero_weather
             self._current_day_weather = day_zero_weather
-        except Exception:
+        except AttributeError:
             self.day_zero_weather = day_zero_weather
             self._current_day_weather = day_zero_weather
         self._current_day = 0
