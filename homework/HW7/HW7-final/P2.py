@@ -57,6 +57,8 @@ all_rows = cursor.fetchall()
 print(all_rows)
 
 print("params: ", baseline_model.get_params())
+print(X_train.columns)
+print(X_test.columns)
 print(baseline_model.coef_)  # https://stackoverflow.com/questions/57924484/finding-coefficients-for-logistic-regression-in-python
 print(baseline_model.intercept_)
 print(baseline_model.score(X_train, y_train))
