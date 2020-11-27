@@ -2,18 +2,19 @@
 
 import numpy as np
 import random
+from collections import OrderedDict
 
 
 class Markov:
-    mappings = {'sunny': 0, 'cloudy': 1, 'rainy': 2, 'snowy': 3, 'windy': 4,
-                'hailing': 5}
+    mappings = OrderedDict([('sunny', 0), ('cloudy', 1), ('rainy', 2),
+                            ('snowy', 3), ('windy', 4), ('hailing', 5)])
 
     def __init__(self, day_zero_weather=None):
         self.data = []
-        self.day_zero_weather = day_zero_weather
+        self.day_zero_weather = day_zero_weather.lower()
         self._current_day = 0
-        self._current_day_weather = day_zero_weather
-        self.days_out = 0
+        self._current_day_weather = day_zero_weather.lower()
+        self.days_out = None        # Helper attribute
 
     # Referenced https://janakiev.com/blog/csv-in-python/
     def load_data(self, file_path='./weather.csv'):
@@ -33,20 +34,25 @@ class Markov:
         return self.data[row][col]
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
-    def get_weather_for_day(self, day, trials=3):  # TODO: trials default ok?
-        self.days_out = day
+    def get_weather_for_day(self, day, trials=3):  # TODO: trials default sensible?
         trials_list = []
         for trial in range(trials):
-            weather_list = []
-            for day in iter(self):
-                # TODO
-                self._simulate_weather_for_day(day)
-            trials_list.append(weather_list)
-        # TODO: Need to reset self.days_out or no need?
+            trials_list.append(self._simulate_weather_for_day(day))
+
+        print(trials_list)  # TODO: Debugging
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def _simulate_weather_for_day(self, day):
-        pass
+        self.days_out = day
+        predicted_weather = None
+
+        for day in self:
+            print(day)  # TODO: Debugging
+            predicted_weather = day
+
+        print()  # TODO: Debugging
+
+        return predicted_weather
 
     def __iter__(self):
         return MarkovIterator(self)
@@ -72,19 +78,29 @@ class Markov:
 class MarkovIterator:
     def __init__(self, markov):
         self.markov = markov
-        self.number_list = []
-        for key, val in markov.mappings:
-            self.number_list.append(val)
 
     def __next__(self):
-        if self.markov.current_day > self.markov.days_out:
-            # TODO: Reset current_day and current_day_weather to 0 and day zero weather here?
+        if self.markov.current_day == 0 and self.markov.days_out == 0:
+            next_day_weather = self.markov.current_day_weather
+        elif self.markov.current_day >= self.markov.days_out:
+            self.markov.current_day = 0
+            self.markov.current_day_weather = self.markov.day_zero_weather
             raise StopIteration()
-        row = self.markov.mappings.get(self.markov.current_day_weather)  # TODO: Row should be current day
-        col = random.choices(self.number_list, tuple(self.markov.data[row]))
+        else:
+            odds_row = self.markov.mappings[self.markov.current_day_weather]
+            # TODO: Check what random.choices is returning
+            next_day_weather = random.choices(list(self.markov.mappings.keys()),
+                                              self.markov.data[odds_row])[0]  # TODO: How to get value back not in array?
         self.markov.current_day += 1
-        self.markov.current_day_weather = col
-        return self.markov.data[row][col]
+        self.markov.current_day_weather = next_day_weather
+        return next_day_weather
 
     def __iter__(self):
         self
+
+
+# TODO: Debugging
+example = Markov('SunNy')
+example.load_data(file_path='./weather.csv')
+print(example.get_prob('sunny', 'cloudy'))  # This line should print 0.3
+example.get_weather_for_day(3, 2)
