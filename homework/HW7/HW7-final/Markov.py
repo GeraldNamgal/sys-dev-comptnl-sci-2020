@@ -96,9 +96,8 @@ class MarkovIterator:
             raise StopIteration()
         else:
             odds_row = Markov.mappings[self.markov.current_day_weather]
-            # TODO: Check what random.choices is returning
             next_day_weather = random.choices(list(Markov.mappings.keys()),
-                                              self.markov.data[odds_row])[0]  # TODO: How to get value back not in array?
+                                              self.markov.data[odds_row])[0]
         self.markov.current_day += 1
         self.markov.current_day_weather = next_day_weather
         return next_day_weather
