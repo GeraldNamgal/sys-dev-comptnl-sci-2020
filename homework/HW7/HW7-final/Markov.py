@@ -12,22 +12,24 @@ class Markov:
     @staticmethod
     def validate_weather(weather):
         try:
+            if type(weather) != str:
+                raise ValueError('Invalid weather type entered')
+            weather = weather.lower()
             if weather not in Markov.mappings:
                 raise ValueError('Invalid weather type entered')
+            return weather
         except Exception:
             raise
 
     def __init__(self, day_zero_weather=None):
         self.data = []
-        try:
-            day_zero_weather = day_zero_weather.lower()
-            Markov.validate_weather(day_zero_weather)
-            self.day_zero_weather = day_zero_weather
-            self._current_day_weather = day_zero_weather
-        except AttributeError:
-            self.day_zero_weather = day_zero_weather
-            self._current_day_weather = day_zero_weather
         self._current_day = 0
+        self.day_zero_weather = day_zero_weather
+        self._current_day_weather = day_zero_weather
+        if day_zero_weather:
+            day_zero_weather = Markov.validate_weather(day_zero_weather)
+            self.day_zero_weather = day_zero_weather
+            self._current_day_weather = day_zero_weather
         self.days_out = None        # Helper attribute
 
     # Referenced https://janakiev.com/blog/csv-in-python/
@@ -35,10 +37,8 @@ class Markov:
         self.data = np.genfromtxt(file_path, delimiter=",")
 
     def get_prob(self, current_day_weather, next_day_weather):
-        current_day_weather = current_day_weather.lower()
-        next_day_weather = next_day_weather.lower()
-        Markov.validate_weather(current_day_weather)
-        Markov.validate_weather(next_day_weather)
+        current_day_weather = Markov.validate_weather(current_day_weather)
+        next_day_weather = Markov.validate_weather(next_day_weather)
         row = Markov.mappings[current_day_weather]
         col = Markov.mappings[next_day_weather]
         return self.data[row][col]
@@ -57,10 +57,10 @@ class Markov:
         predicted_weather = None
 
         for day in self:
-            print(day)  # TODO: Debugging
+            # print(day)  # TODO: Debugging
             predicted_weather = day
 
-        print()  # TODO: Debugging
+        # print()  # TODO: Debugging
 
         return predicted_weather
 
@@ -109,7 +109,8 @@ class MarkovIterator:
 
 
 # TODO: Debugging
-example = Markov('SunNy')
+example = Markov('ClOudy')
 example.load_data(file_path='./weather.csv')
-print(example.get_prob('sunny', 'cloudy'))  # This line should print 0.3
-example.get_weather_for_day(3, 2)
+# print(example.get_prob('sunny', 'clOudy'))  # This line should print 0.3
+# print(example.get_prob('clouDy', 'windy'))  # This line should print 0.08
+example.get_weather_for_day(2, 7)
