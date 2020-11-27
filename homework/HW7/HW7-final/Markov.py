@@ -19,10 +19,12 @@ class Markov:
 
     def __init__(self, day_zero_weather=None):
         self.data = []
-        self._current_day_weather = None
-        if type(day_zero_weather) == str:
+        try:
             day_zero_weather = day_zero_weather.lower()
             Markov.validate_weather(day_zero_weather)
+            self.day_zero_weather = day_zero_weather
+            self._current_day_weather = day_zero_weather
+        except Exception:
             self.day_zero_weather = day_zero_weather
             self._current_day_weather = day_zero_weather
         self._current_day = 0
