@@ -84,6 +84,7 @@ class MarkovIterator:
     def __init__(self, markov):
         self.markov = markov
 
+    # TODO: Need to raise an exception per https://piazza.com/class/kc57xuuysdm64b?cid=542
     def __next__(self):
         if self.markov.current_day == 0 and self.markov.days_out == 0:
             next_day_weather = self.markov.current_day_weather
