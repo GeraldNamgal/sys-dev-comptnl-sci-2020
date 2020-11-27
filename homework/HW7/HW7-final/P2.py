@@ -56,10 +56,19 @@ cursor.execute("SELECT * FROM model_results")
 all_rows = cursor.fetchall()
 print(all_rows)
 
+# TODO: "Coefficients can be inserted one row at a time, labeled with the
+#       feature name. Which parameters with multiple rows are you seeing?" --
+#       https://piazza.com/class/kc57xuuysdm64b?cid=544
+
 print("params: ", baseline_model.get_params())
-print(X_train.columns)
-print(X_test.columns)
-print(baseline_model.coef_)  # https://stackoverflow.com/questions/57924484/finding-coefficients-for-logistic-regression-in-python
+print(X_train.columns)  # https://datascience.stackexchange.com/questions/29131/feature-names-in-logisticregression
+# print(X_test.columns)
+print()
+for name, num in zip(X_train.columns, baseline_model.coef_[0]):
+    print(name, num)
+print()
+print(baseline_model.coef_[0])  # https://stackoverflow.com/questions/57924484/finding-coefficients-for-logistic-regression-in-python
+print()
 print(baseline_model.intercept_)
 print(baseline_model.score(X_train, y_train))
 print(baseline_model.score(X_test, y_test))
