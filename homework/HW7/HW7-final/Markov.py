@@ -2,7 +2,8 @@
 
 import numpy as np
 import random
-from collections import OrderedDict
+from collections import OrderedDict, Counter
+from statistics import mode
 
 
 class Markov:
@@ -49,7 +50,11 @@ class Markov:
         for trial in range(trials):
             trials_list.append(self._simulate_weather_for_day(day))
 
-        print(trials_list)  # TODO: Debugging
+        # TODO: Debugging
+        print(trials_list)
+        print(mode(trials_list))
+        # Referenced https: // stackoverflow.com / questions / 2600191 / how - can - i - count - the - occurrences - of - a - list - item
+        print(Counter(trials_list))
 
     # TODO: Supposed to be instance method (no self in HW instructions)?
     def _simulate_weather_for_day(self, day):
