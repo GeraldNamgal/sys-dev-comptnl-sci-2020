@@ -11,9 +11,11 @@ class Markov:
 
     def __init__(self, day_zero_weather=None):
         self.data = []
-        self.day_zero_weather = day_zero_weather.lower()
+        self._current_day_weather = None
+        if type(day_zero_weather) == str:
+            self.day_zero_weather = day_zero_weather.lower()
+            self._current_day_weather = day_zero_weather.lower()
         self._current_day = 0
-        self._current_day_weather = day_zero_weather.lower()
         self.days_out = None        # Helper attribute
 
     # Referenced https://janakiev.com/blog/csv-in-python/
