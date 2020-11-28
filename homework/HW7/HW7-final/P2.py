@@ -65,6 +65,8 @@ def save_to_database(model_id, model_desc, db, model,
     db.commit()
 
 
+# Model 1
+
 # Load data
 data = load_breast_cancer()
 X = pd.DataFrame(data.data, columns=data.feature_names)
@@ -77,10 +79,36 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 baseline_model = LogisticRegression(solver='liblinear')
 baseline_model.fit(X_train, y_train)
 
-# TODO: Debugging...
 save_to_database(1, 'Baseline model', db, baseline_model,
                  X_train, X_test, y_train, y_test)
 
+# Model 2
+
+feature_cols = ['mean radius',
+                'texture error',
+                'worst radius',
+                'worst compactness',
+                'worst concavity']
+
+X_train_reduced = X_train[feature_cols]
+X_test_reduced = X_test[feature_cols]
+
+reduced_model = LogisticRegression(solver='liblinear')
+reduced_model.fit(X_train_reduced, y_train)
+
+save_to_database(2, 'Reduced model', db, reduced_model,
+                 X_train_reduced, X_test_reduced, y_train, y_test)
+
+# Model 3
+
+penalized_model = LogisticRegression(solver='liblinear', penalty='l1', random_state=87, max_iter=150)
+penalized_model.fit(X_train, y_train)
+
+save_to_database(3, 'L1 penalty model', db, penalized_model,
+                 X_train, X_test, y_train, y_test)
+
+
+# TODO: Debugging
 cursor.execute("SELECT * FROM model_params")
 for row in cursor.fetchall():
     print(row)
