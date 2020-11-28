@@ -10,22 +10,60 @@ from sklearn.datasets import load_breast_cancer
 
 db = sqlite3.connect('regression.sqlite')
 cursor = db.cursor()
-# cursor.execute('''CREATE TABLE model_params (
-#                id INTEGER PRIMARY KEY NOT NULL,
-#                desc TEXT,
-#                param_name TEXT,
-#                value REAL)''')
-# cursor.execute('''CREATE TABLE model_coefs (
-#                id INTEGER PRIMARY KEY NOT NULL,
-#                desc TEXT,
-#                feature_name TEXT,
-#                value REAL)''')
-# cursor.execute('''CREATE TABLE model_results (
-#                id INTEGER PRIMARY KEY NOT NULL,
-#                desc TEXT,
-#                train_score REAL,
-#                test_score REAL)''')
-# db.commit()
+cursor.execute("DROP TABLE IF EXISTS model_params")
+cursor.execute("DROP TABLE IF EXISTS model_coefs")
+cursor.execute("DROP TABLE IF EXISTS model_results")
+# TODO: Should the tables have at least one NOT NULL column? --
+cursor.execute('''CREATE TABLE model_params (
+               id INTEGER,
+               desc TEXT,
+               param_name TEXT,
+               value BLOB)''')  # TODO: BLOB sensible here?
+cursor.execute('''CREATE TABLE model_coefs (
+               id INTEGER,
+               desc TEXT,
+               feature_name TEXT,
+               value REAL)''')
+cursor.execute('''CREATE TABLE model_results (
+               id INTEGER,
+               desc TEXT,
+               train_score REAL,
+               test_score REAL)''')
+db.commit()
+
+
+def save_to_database(model_id, model_desc, db, model,
+                     X_train, X_test, y_train, y_test):
+    # Goes in model_params
+    for key, val in model.get_params().items():
+        cursor.execute('''INSERT INTO model_params
+        (id, desc, param_name, value)
+        VALUES (?, ?, ?, ?)''',
+                       (model_id, model_desc, key, val))
+        db.commit()
+
+    # Goes in model_coefs
+    # TODO: Handling intercept correctly?
+    cursor.execute('''INSERT INTO model_coefs
+    (id, desc, feature_name, value)
+    VALUES (?, ?, ?, ?)''',
+                   (model_id, model_desc, 'intercept', model.intercept_[0]))
+    db.commit()
+    for name, num in zip(X_train.columns, model.coef_[0]):
+        cursor.execute('''INSERT INTO model_coefs
+        (id, desc, feature_name, value)
+        VALUES (?, ?, ?, ?)''',
+                       (model_id, model_desc, name, num))
+        db.commit()
+
+    # Goes in model_results
+    cursor.execute('''INSERT INTO model_results
+        (id, desc, train_score, test_score)
+        VALUES (?, ?, ?, ?)''',
+                   (model_id, model_desc, model.score(X_train, y_train),
+                    model.score(X_test, y_test)))
+    db.commit()
+
 
 # Load data
 data = load_breast_cancer()
@@ -39,36 +77,21 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 baseline_model = LogisticRegression(solver='liblinear')
 baseline_model.fit(X_train, y_train)
 
+# TODO: Debugging...
+save_to_database(1, 'Baseline model', db, baseline_model,
+                 X_train, X_test, y_train, y_test)
 
-def save_to_database(model_id, model_desc, db, model,
-                     X_train, X_test, y_train, y_test):
-    pass
-
-
-# TODO: Debugging
 cursor.execute("SELECT * FROM model_params")
-all_rows = cursor.fetchall()
-print(all_rows)
+for row in cursor.fetchall():
+    print(row)
 cursor.execute("SELECT * FROM model_coefs")
-all_rows = cursor.fetchall()
-print(all_rows)
+for row in cursor.fetchall():
+    print(row)
 cursor.execute("SELECT * FROM model_results")
-all_rows = cursor.fetchall()
-print(all_rows)
+for row in cursor.fetchall():
+    print(row)
 
-# TODO: "Coefficients can be inserted one row at a time, labeled with the
-#       feature name. Which parameters with multiple rows are you seeing?" --
-#       https://piazza.com/class/kc57xuuysdm64b?cid=544
 
-print("params: ", baseline_model.get_params())
-print(X_train.columns)  # https://datascience.stackexchange.com/questions/29131/feature-names-in-logisticregression
-# print(X_test.columns)
-print()
-for name, num in zip(X_train.columns, baseline_model.coef_[0]):
-    print(name, num)
-print()
-print(baseline_model.coef_[0])  # https://stackoverflow.com/questions/57924484/finding-coefficients-for-logistic-regression-in-python
-print()
-print(baseline_model.intercept_)
-print(baseline_model.score(X_train, y_train))
-print(baseline_model.score(X_test, y_test))
+# Referenced:
+# https://datascience.stackexchange.com/questions/29131/feature-names-in-logisticregression
+# https://stackoverflow.com/questions/57924484/finding-coefficients-for-logistic-regression-in-python
