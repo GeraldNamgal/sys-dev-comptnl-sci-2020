@@ -49,7 +49,7 @@ def save_to_database(model_id, model_desc, db, model,
     VALUES (?, ?, ?, ?)''',
                    (model_id, model_desc, 'intercept', model.intercept_[0]))
     db.commit()
-    for name, num in zip(X_train.columns, model.coef_[0]):
+    for name, num in zip(data.feature_names, model.coef_[0]):
         cursor.execute('''INSERT INTO model_coefs
         (id, desc, feature_name, value)
         VALUES (?, ?, ?, ?)''',
