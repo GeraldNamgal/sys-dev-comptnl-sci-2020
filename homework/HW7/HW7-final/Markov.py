@@ -50,7 +50,7 @@ class Markov:
             trials_list.append(self._simulate_weather_for_day(day))
         return trials_list
 
-    # TODO: Supposed to be instance method (no self in HW instructions)?
+    # TODO: Supposed to be instance method (no self in HW instructions)? --------------- Office hours raised here for day_zero_weather check
     def _simulate_weather_for_day(self, day):
         self.days_out = day
         predicted_weather = None

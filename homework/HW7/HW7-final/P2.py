@@ -18,7 +18,7 @@ cursor.execute('''CREATE TABLE model_params (
                id INTEGER,
                desc TEXT,
                param_name TEXT,
-               value BLOB)''')  # TODO: BLOB sensible here?
+               value BLOB)''')  # TODO: BLOB sensible here? -Johnathan said use text cause values get jumbled
 cursor.execute('''CREATE TABLE model_coefs (
                id INTEGER,
                desc TEXT,
