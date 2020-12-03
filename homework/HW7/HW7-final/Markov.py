@@ -43,18 +43,22 @@ class Markov:
         col = Markov.mappings[next_day_weather]
         return self.data[row][col]
 
-    def get_weather_for_day(self, day, trials=1):  # TODO: trials default sensible?
+    def get_weather_for_day(self, day, trials=1):
         trials_list = []
         for trial in range(trials):
             trials_list.append(self._simulate_weather_for_day(day))
         return trials_list
 
-    # TODO: Office hours raised here for day_zero_weather check
     def _simulate_weather_for_day(self, day):
+        try:
+            if self.day_zero_weather is None:
+                raise Exception('Day zero weather not initialized')
+        except Exception:
+            raise
         self.days_out = day
         predicted_weather = None
-        for day in self:
-            # print(day)  # Debugging
+        for day in self:    # Calls MarkovIterator
+            # print(day)    # Debugging
             predicted_weather = day
         return predicted_weather
 
@@ -83,8 +87,6 @@ class MarkovIterator:
     def __init__(self, markov):
         self.markov = markov
 
-    # TODO: Need to raise an exception per https://piazza.com/class/kc57xuuysdm64b?cid=542
-    #       as well as https://piazza.com/class/kc57xuuysdm64b?cid=536 ...?
     def __next__(self):
         if self.markov.current_day == 0 and self.markov.days_out == 0:
             next_day_weather = self.markov.current_day_weather
@@ -105,7 +107,9 @@ class MarkovIterator:
 
 # # Debugging
 # example = Markov('ClOudy')
+# example = Markov()  # When day zero weather is None
 # example.load_data(file_path='./weather.csv')
 # # print(example.get_prob('sunny', 'clOudy'))  # This line should print 0.3
 # # print(example.get_prob('clouDy', 'windy'))  # This line should print 0.08
 # trials_list = example.get_weather_for_day(2, 7)
+# print(example.get_weather_for_day(2))  # When no trial speficied
