@@ -43,14 +43,13 @@ class Markov:
         col = Markov.mappings[next_day_weather]
         return self.data[row][col]
 
-    # TODO: Supposed to be instance method (no self in HW instructions)?
     def get_weather_for_day(self, day, trials=1):  # TODO: trials default sensible?
         trials_list = []
         for trial in range(trials):
             trials_list.append(self._simulate_weather_for_day(day))
         return trials_list
 
-    # TODO: Supposed to be instance method (no self in HW instructions)? --------------- Office hours raised here for day_zero_weather check
+    # TODO: Office hours raised here for day_zero_weather check
     def _simulate_weather_for_day(self, day):
         self.days_out = day
         predicted_weather = None
