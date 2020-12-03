@@ -13,12 +13,11 @@ cursor = db.cursor()
 cursor.execute("DROP TABLE IF EXISTS model_params")
 cursor.execute("DROP TABLE IF EXISTS model_coefs")
 cursor.execute("DROP TABLE IF EXISTS model_results")
-# TODO: Should the tables have at least one NOT NULL column? --
 cursor.execute('''CREATE TABLE model_params (
                id INTEGER,
                desc TEXT,
                param_name TEXT,
-               value BLOB)''')  # TODO: BLOB sensible here? -Johnathan said use text cause values get jumbled
+               value TEXT)''')
 cursor.execute('''CREATE TABLE model_coefs (
                id INTEGER,
                desc TEXT,
@@ -43,7 +42,6 @@ def save_to_database(model_id, model_desc, db, model,
         db.commit()
 
     # Goes in model_coefs
-    # TODO: Handling intercept correctly?
     cursor.execute('''INSERT INTO model_coefs
     (id, desc, feature_name, value)
     VALUES (?, ?, ?, ?)''',
@@ -140,7 +138,7 @@ print()
 test_score = test_model.score(X_test, y_test)
 print(f'Reproduced best validation score: {test_score}')
 
-# # TODO: Debugging -- View the tables
+# DEBUGGING -- View the tables
 # cursor.execute("SELECT * FROM model_params")
 # for row in cursor.fetchall():
 #     print(row)
