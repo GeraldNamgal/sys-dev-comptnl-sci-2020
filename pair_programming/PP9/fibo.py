@@ -33,4 +33,6 @@ class FibonacciIterator:
 
 # Demo
 example = Fibonacci(5)
-print(list(iter(example)))
+# print(list(iter(example)))
+for i in iter(example):
+    print(i)
